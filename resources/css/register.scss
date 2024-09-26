@@ -1,0 +1,22 @@
+.register {
+    width: 100vw;
+
+    position: relative;
+}
+
+.register__container {
+    box-sizing: border-box;
+    padding: 80px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: var(--big-gap);
+}
+
+.register__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    align-items: center;
+}
