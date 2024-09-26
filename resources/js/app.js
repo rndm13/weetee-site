@@ -1,4 +1,4 @@
-import.meta.glob(["../images/**", "../fonts/**"]);
+import.meta.glob(["../imgs/**", "../fonts/**"]);
 
 import "../lib/jquery/dist/jquery.min.js";
 import "../lib/jquery-validation/dist/jquery.validate.min.js";

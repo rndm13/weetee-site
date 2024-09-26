@@ -48,10 +48,10 @@
                 </div>
                 <div class="carousel__pagination">
                     <button class="carousel__prev">
-                        <img src={{ Vite::image('previous.svg') alt="Previous">
+                        <img src={{ Vite::image('previous.svg') }} alt="Previous">
                     </button>
                     <button class="carousel__next">
-                        <img src={{ Vite::image('next.svg') alt="Next">
+                        <img src={{ Vite::image('next.svg') }} alt="Next">
                     </button>
                 </div>
             </div>
