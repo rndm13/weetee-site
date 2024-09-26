@@ -1,11 +1,11 @@
-import '../lib/slick/slick.min.js'
-import '../lib/jquery/dist/jquery.min.js'
-import '../lib/jquery-validation/dist/jquery.validate.min.js'
+import.meta.glob(["../images/**", "../fonts/**"]);
 
-import './math.js';
+import "../lib/jquery/dist/jquery.min.js";
+import "../lib/jquery-validation/dist/jquery.validate.min.js";
+import "../lib/slick/slick.min.js";
 
-import './header.js';
-import './site.js';
-import './backgrounds.js';
+import "./header";
+import "./site";
+import "./backgrounds";
 
-import './login.js';
+import "./login";

@@ -1,10 +1,10 @@
-function lerp(t, x1, x2) {
+export function lerp(t, x1, x2) {
     return x1 + (x2 - x1) * t;
 }
 
-function lerpBezier(t, spx, spy, cp1x, cp1y, cp2x, cp2y, epx, epy) {
+export function lerpBezier(t, spx, spy, cp1x, cp1y, cp2x, cp2y, epx, epy) {
     let points = [
-        {x: spx, y: spy}, 
+        {x: spx, y: spy},
         {x: cp1x, y: cp1y},
         {x: cp2x, y: cp2y},
         {x: epx, y: epy}
@@ -22,7 +22,7 @@ function lerpBezier(t, spx, spy, cp1x, cp1y, cp2x, cp2y, epx, epy) {
     return points[0];
 }
 
-function lerpColor(t, fromCol, toCol) {
+export function lerpColor(t, fromCol, toCol) {
     let fromR = parseInt(fromCol.substr(1, 2), 16);
     let fromG = parseInt(fromCol.substr(3, 2), 16);
     let fromB = parseInt(fromCol.substr(5, 2), 16);
@@ -30,7 +30,7 @@ function lerpColor(t, fromCol, toCol) {
     let toR = parseInt(toCol.substr(1, 2), 16);
     let toG = parseInt(toCol.substr(3, 2), 16);
     let toB = parseInt(toCol.substr(5, 2), 16);
-    
+
     function componentToHex(c) {
         var hex = c.toString(16);
         return hex.length == 1 ? "0" + hex : hex;
@@ -42,4 +42,3 @@ function lerpColor(t, fromCol, toCol) {
 
     return `#${componentToHex(R)}${componentToHex(G)}${componentToHex(B)}`;
 }
-

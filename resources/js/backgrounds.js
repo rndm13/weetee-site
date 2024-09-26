@@ -1,3 +1,5 @@
+import {lerpColor, lerpBezier} from './math';
+
 $(document).ready(function() {
     $.map($(".line-background"), function(canvas) {
         let ctx = canvas.getContext('2d');
@@ -35,12 +37,12 @@ $(document).ready(function() {
                 ctx.beginPath();
 
                 ctx.lineWidth = 5;
-                ctx.strokeStyle = "#33032F"; 
+                ctx.strokeStyle = "#33032F";
 
                 ctx.moveTo(0, pointY);
                 let coef = pointY / 100;
                 ctx.bezierCurveTo(
-                    canvas.width * 1 / 3, pointY + 200 * coef * 0.5, 
+                    canvas.width * 1 / 3, pointY + 200 * coef * 0.5,
                     canvas.width * 2 / 3 - 50, pointY - 100 * coef,
                     canvas.width * 3 / 3 + 100, pointY - 50 * coef * 1.2);
                 ctx.stroke();
@@ -51,12 +53,12 @@ $(document).ready(function() {
 
                 let {x, y} = lerpBezier(
                     progress,
-                    0, pointY, 
+                    0, pointY,
                     canvas.width * 1 / 3, pointY + 200 * coef * 0.5,
-                    canvas.width * 2 / 3 - 50, pointY - 100 * coef, 
+                    canvas.width * 2 / 3 - 50, pointY - 100 * coef,
                     canvas.width * 3 / 3 + 100, pointY - 50 * coef * 1.2);
 
-                ctx.strokeStyle = "#531253"; 
+                ctx.strokeStyle = "#531253";
                 ctx.ellipse(x, y, 3, 3, 0, 0, Math.PI * 2);
                 ctx.stroke();
 
@@ -105,7 +107,7 @@ $(document).ready(function() {
 
                 const width_points = base_width_points * (type + 1) / 2;
                 for (let j = 0; j * (gap_points + width_points) + padding_left < canvas.width; j++) {
-                    const left = j * (gap_points + width_points) + padding_left; 
+                    const left = j * (gap_points + width_points) + padding_left;
                     const phase = type * 2;
                     const speed = type / 100 + 0.5;
                     const max_height = Math.max(base_height, base_height * (j / 100));
@@ -115,12 +117,12 @@ $(document).ready(function() {
 
                     ctx.lineCap = "round";
                     ctx.lineWidth = 5;
-                    const color = lerpColor(1 - (top / canvas.height), "#531253", "#33032F"); 
+                    const color = lerpColor(1 - (top / canvas.height), "#531253", "#33032F");
                     ctx.strokeStyle = color;
 
                     ctx.moveTo(left, top);
                     ctx.lineTo(left, top + height);
-                        
+
                     ctx.stroke();
                 }
             }

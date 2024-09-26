@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield("title") - Weetee</title>
 
-    @vite(['resources/css/app.scss', 'resources/js/app.js'])
+    @vite(['resources/css/app.scss'])
+    @vite(['resources/js/app.js'])
 </head>
 <body>
     <header class="header">
@@ -20,7 +21,7 @@
 
         <div class="menu">
             <button class="menu__button">
-                <img src="/imgs/menu.svg" alt="Menu">
+                <img src={{ Vite::asset('resources/imgs/menu.svg') }} alt="Menu">
             </button>
 
             <div class="menu__hidden">
@@ -36,7 +37,7 @@
     </header>
 
     <main class="body">
-        @yield('content')
+        @yield("content")
     </main>
 
     <footer class="footer">

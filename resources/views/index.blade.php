@@ -1,8 +1,6 @@
 @extends("master")
 
 @section("title", "Home")
-@section("css", "/css/home.css")
-@section("js", "/js/home.js")
 
 @section("content")
 <section class="home" id="home">
@@ -12,12 +10,12 @@
 
         <div class="home__buttons">
             <button class="button--install">
-                <img src="/imgs/linux.png" alt="Linux">
+                <img src={{ Vite::image('linux.png') }} alt="Linux">
                 Install for linux
             </button>
 
             <button class="button--install">
-                <img src="/imgs/windows_10.png" alt="Windows">
+                <img src={{ Vite::image('windows_10.png') }} alt="Windows">
                 Install for windows
             </button>
         </div>
@@ -44,16 +42,16 @@
         <div class="about__screenshots">
             <div class="carousel">
                 <div class="carousel__items">
-                    <img class="screenshot" src="/imgs/screenshot_editor.png" alt="Weetee Editor">
-                    <img class="screenshot" src="/imgs/screenshot_results.png" alt="Weetee Testing Results">
-                    <img class="screenshot" src="/imgs/screenshot_remote.png" alt="Weetee Remote File Sync">
+                    <img class="screenshot" src={{ Vite::image('screenshot_editor.png') }} alt="Weetee Editor">
+                    <img class="screenshot" src={{ Vite::image('screenshot_results.png') }} alt="Weetee Testing Results">
+                    <img class="screenshot" src={{ Vite::image('screenshot_remote.png') }} alt="Weetee Remote File Sync">
                 </div>
                 <div class="carousel__pagination">
                     <button class="carousel__prev">
-                        <img src="/imgs/previous.svg" alt="Previous">
+                        <img src={{ Vite::image('previous.svg') alt="Previous">
                     </button>
                     <button class="carousel__next">
-                        <img src="/imgs/next.svg" alt="Next">
+                        <img src={{ Vite::image('next.svg') alt="Next">
                     </button>
                 </div>
             </div>
