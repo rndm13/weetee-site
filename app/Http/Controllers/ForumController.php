@@ -11,7 +11,7 @@ class ForumController extends Controller
 {
     public function show(): View
     {
-        $posts = Post::with('users')->paginate();
+        $posts = Post::with('user')->orderBy('created_at')->paginate();
 
         return view('forum.index', ['posts' => $posts]);
     }

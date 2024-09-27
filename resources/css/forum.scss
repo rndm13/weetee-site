@@ -29,8 +29,65 @@
 }
 
 .posts {
+    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 3fr;
 
     gap: var(--gap);
+
+    padding: 8px;
+
+    border: var(--border-size) solid var(--silenced-fg-color);
+    border-radius: var(--rounding);
+
+    align-items: center;
+    justify-items: center;
+
+    &__creation {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+
+        color: var(--silenced-fg-color);
+    }
+
+
+    &__username {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+
+        text-decoration: none;
+
+        color: var(--silenced-fg-color);
+    }
+
+    &__title {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+
+        text-decoration: none;
+
+        color: var(--fg-color);
+    }
+
+    &__separator:not(:last-child) {
+        content: ' ';
+        width: 100%;
+
+        margin: 0;
+
+        border-top: 1px solid var(--silenced-fg-color);
+
+        grid-column-start: 1;
+        grid-column-end: -1;
+    }
+
+    &__separator:last-child {
+        display: none;
+    }
 }

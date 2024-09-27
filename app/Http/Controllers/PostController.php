@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,9 @@ class PostController extends Controller
 {
     public function show(int $id): View
     {
-        $post = Post::find($id);
+        $post = Post::with(['comments' => function($comments) {
+            return $comments->orderBy('created_at')->paginate();
+        }])->find($id);
 
         if ($post == null) {
             return http_response_code(404);

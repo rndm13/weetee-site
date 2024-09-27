@@ -15,11 +15,10 @@
 
         <ul class="posts">
             @foreach ($posts as $post)
-            <li class="post">
-                <div class="post__creation">{{$post.user.created_at}}</div>
-                <div class="post__title">{{$post.title}}</div>
-                <div class="post__username">{{$post.user.name}}</div>
-            </li>
+                <p class="posts__creation">@date($post->created_at)</p>
+                <a class="posts__username">{{ $post->user->name }}</a>
+                <a class="posts__title" href="/post/{{$post->id}}">{{ $post->title }}</a>
+                <hr class="posts__separator"/>
             @endforeach
         </ul>
     </div>
