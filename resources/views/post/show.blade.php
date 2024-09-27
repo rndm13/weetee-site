@@ -23,11 +23,13 @@
         </div>
 
         <form class="form" action="/comment/create/{{ $post->id }}" method="POST">
+            @csrf
+
             <h3 class="form__title"> Leave your own comment!</h3>
 
             <div class="form__group">
-                <label for="comment">Comment</label>
-                <textarea name="comment"></textarea>
+                <label for="description">Description</label>
+                <textarea name="description"></textarea>
                 <p class="form__error">
                 @error('comment')
                     {{ $message }}

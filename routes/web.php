@@ -5,6 +5,7 @@ use App\Http\Controllers;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ForumController;
 
 Route::get('/', [HomeController::class, 'show'])->name('index');
@@ -25,3 +26,8 @@ Route::get('/register', [AccountController::class, 'register_form'])->name('acco
 Route::post('/login', [AccountController::class, 'login'])->name('account.login');
 Route::post('/register', [AccountController::class, 'register'])->name('account.register');
 Route::get('/logout', [AccountController::class, 'logout'])->name('account.logout');
+
+Route::post('/comment/create/{post_id}', [CommentController::class, 'create'])->name('comment.create');
+Route::put('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
+Route::delete('/comment/edit/{id}', [CommentController::class, 'delete'])->name('comment.delete');
+
