@@ -17,6 +17,18 @@
             <a href="/#faq" class="link">FAQ</a>
             <a href="/documentation" class="link">Documentation</a>
             <a href="/forum" class="link">Forum</a>
+
+            <div class="auth-nav">
+                @if (!Auth::check())
+                    <a href="/login" class="link">Login</a>
+                    <a href="/register" class="link">Register</a>
+                @else
+                    <div class="user">
+                        <p class="user__name">{{ Auth::user()->name }}</p>
+                        <a href="/logout" class="link">Logout</a>
+                    </div>
+                @endif
+            </div>
         </nav>
 
         <div class="menu">
@@ -26,6 +38,19 @@
 
             <div class="menu__hidden">
                 <div class="container">
+                    @if (!Auth::check())
+                        <a href="/login" class="link">Login</a>
+                        <a href="/register" class="link">Register</a>
+                    @else
+                        <div class="user">
+                            <p class="user__name">{{ Auth::user()->name }}</p>
+                            <a href="/logout" class="link">Logout</a>
+                        </div>
+                        <hr class="menu__separator"/>
+                    @endif
+
+
+
                     <a href="/" class="link">Home</a>
                     <a href="/#about" class="link">About</a>
                     <a href="/#faq" class="link">FAQ</a>

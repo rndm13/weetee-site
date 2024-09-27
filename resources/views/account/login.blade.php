@@ -1,8 +1,6 @@
 @extends("master")
 
-@section("title", "Home")
-@section("css", "/css/home.css")
-@section("js", "/js/home.js")
+@section("title", "Login")
 
 @section("content")
 
@@ -10,24 +8,28 @@
     <canvas class="line-background"></canvas>
     <div class="container login__container">
         <form action="/login" method="POST" class="form">
-            <h3 class="form__title">Login</h3>
+            @csrf
 
-            <div class="form__group">
-                <label for="name">Name</label>
-                <input type="text" name="name">
-                <p class="form__error"></p>
-            </div>
+            <h3 class="form__title">Login</h3>
 
             <div class="form__group">
                 <label for="email">Email</label>
                 <input type="email" name="email">
-                <p class="form__error"></p>
+                <p class="form__error">
+                @error('email')
+                    {{ $message }}
+                @enderror
+                </p>
             </div>
 
             <div class="form__group">
                 <label for="password">Password</label>
                 <input type="password" name="password">
-                <p class="form__error"></p>
+                <p class="form__error">
+                @error('email')
+                    {{ $message }}
+                @enderror
+                </p>
             </div>
 
             <button class="form__submit" id="login-submit">Login</button>
@@ -39,3 +41,5 @@
         </form>
     </div>
 </section>
+
+@endsection

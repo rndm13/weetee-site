@@ -20,7 +20,7 @@ body {
 
 .container {
     max-width: var(--container-width);
-    
+
     padding: var(--padding);
 
     display: flex;
@@ -114,114 +114,104 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--gap);
-}
 
-.form::after {
-    content: '';
-    left: 0;
-    top: 0;
-    position: absolute;
-    z-index: -1;
+    &::after {
+        content: '';
+        left: 0;
+        top: 0;
+        position: absolute;
+        z-index: -1;
 
-    width: 100%;
-    height: 100%;
+        width: 100%;
+        height: 100%;
 
-    border-radius: var(--rounding);
+        border-radius: var(--rounding);
 
-    background: var(--sec-bg-color);
-    opacity: 80%;
-}
+        background: var(--sec-bg-color);
+        opacity: 80%;
+    }
 
-.form__title {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 36px;
-    color: var(--fg-color);
-    padding-bottom: var(--big-gap);
-}
+    &__title {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 36px;
+        color: var(--fg-color);
+        padding-bottom: var(--big-gap);
+    }
 
-.form__group {
-    width: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    justify-items: center;
-    align-items: center;
+    &__group {
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+        justify-items: center;
+        align-items: left;
 
-    gap: var(--gap);
-}
+        gap: var(--gap);
+    }
 
-.form__group > label {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
-    color: var(--fg-color);
-}
+    &__group > label {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        color: var(--fg-color);
+    }
 
-.form__group > input {
-    margin-left: auto;
-    min-width: 300px;
-    padding: 4px;
-    
-    background: 0;
-    border-radius: var(--rounding);
-    border: var(--border-size) solid var(--fg-color);
+    &__group > input {
+        min-width: 300px;
+        padding: 4px;
 
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 16px;
+        background: 0;
+        border-radius: var(--rounding);
+        border: var(--border-size) solid var(--fg-color);
 
-    color: var(--fg-color);
-}
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 16px;
 
-.form__error {
-    width: 100%;
-    min-height: 24px;
+        color: var(--fg-color);
+    }
 
-    font-family: 'DM Sans', sans-serif;
-    font-size: 20px;
-    line-height: 24px;
-}
+    &__error {
+        width: 100%;
+        min-height: 24px;
 
-.form__submit {
-    padding: 8px 12px;
-    max-height: 100px;
+        color: var(--silenced-fg-color);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+    }
 
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    gap: var(--gap);
+    &__submit {
+        padding: 8px 12px;
+        max-height: 100px;
 
-    color: var(--fg-color);
-    background: var(--primary-color);
-    border: 0;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        gap: var(--gap);
 
-    border-radius: var(--rounding);
+        color: var(--fg-color);
+        background: var(--primary-color);
+        border: 0;
 
-    font-family: 'DM Sans', sans-serif;
-    font-size: 20px;
-    line-height: 24px;
+        border-radius: var(--rounding);
 
-    transition: background 0.25s ease;
-}
+        font-family: 'DM Sans', sans-serif;
+        font-size: 20px;
+        line-height: 24px;
 
-.form__submit:hover {
-    background: var(--secondary-color);
-}
+        transition: background 0.25s ease;
+    }
 
-.form__submit--sending {
-    background: var(--secondary-color);
-    color: var(--silenced-fg-color);
-}
+    &__submit:hover {
+        background: var(--secondary-color);
+    }
 
-.login__links {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    line-height: 24px;
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap);
+    &__submit--sending {
+        background: var(--secondary-color);
+        color: var(--silenced-fg-color);
+    }
 }
