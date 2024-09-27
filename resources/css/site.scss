@@ -161,7 +161,7 @@ body {
     &__group > input,textarea {
         min-width: 300px;
         max-width: 500px;
-        padding: 4px;
+        padding: 8px 4px;
 
         background: 0;
         border-radius: var(--rounding);
@@ -214,5 +214,19 @@ body {
     &__submit--sending {
         background: var(--secondary-color);
         color: var(--silenced-fg-color);
+    }
+}
+
+.pagination {
+    &__next {
+
+    }
+
+    &__page {
+
+    }
+
+    &__prev {
+
     }
 }

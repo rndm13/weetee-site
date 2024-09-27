@@ -34,9 +34,15 @@ class PostController extends Controller
         return to_route('index');
     }
 
-    public function edit_form(): View
+    public function edit_form(int $id): View
     {
-        return view('post.edit');
+        $post = Post::find($id);
+
+        if ($post == null) {
+            return http_response_code(404);
+        }
+
+        return view('post.edit', ['post' => $post]);
     }
 
     public function edit(int $id, Request $request): RedirectResponse

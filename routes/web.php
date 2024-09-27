@@ -13,11 +13,10 @@ Route::get('/post/create', [PostController::class, 'create_form'])->name('post.c
 Route::post('/post/create', [PostController::class, 'create'])->name('post.create');
 
 Route::get('/post/edit/{id}', [PostController::class, 'edit_form'])->name('post.edit_form');
-Route::put('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
-Route::delete('/post/edit/{id}', [PostController::class, 'delete'])->name('post.delete');
+Route::post('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+Route::post('/post/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
 
-Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
-
+Route::get('/post/view/{id}', [PostController::class, 'show'])->name('post.show');
 
 Route::get('/forum', [ForumController::class, 'show'])->name('forum.index');
 
@@ -30,4 +29,3 @@ Route::get('/logout', [AccountController::class, 'logout'])->name('account.logou
 Route::post('/comment/create/{post_id}', [CommentController::class, 'create'])->name('comment.create');
 Route::put('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
 Route::delete('/comment/edit/{id}', [CommentController::class, 'delete'])->name('comment.delete');
-

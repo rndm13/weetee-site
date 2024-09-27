@@ -1,12 +1,12 @@
 @extends("master")
 
-@section("title", "Home")
+@section("title", "Create new post")
 
 @section("content")
 
-<section class="create-post" id="create-post">
+<section class="form-post" id="create-post">
     <canvas class="sine-background"></canvas>
-    <div class="container create-post__container">
+    <div class="container form-post__container">
         <form action="/post/create" method="POST" class="form">
             @csrf
 

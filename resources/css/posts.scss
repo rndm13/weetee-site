@@ -1,11 +1,11 @@
-.create-post {
+.form-post {
     width: 100vw;
     min-height: 100vh;
 
     position: relative;
 }
 
-.container.create-post__container {
+.container.form-post__container {
     box-sizing: border-box;
     padding: 40px 40px;
     height: 100%;
@@ -31,7 +31,7 @@
 
     &__container {
         margin: 40px 120px;
-        padding: 12px;
+        padding: 24px;
         position: relative;
 
         display: flex;
@@ -47,8 +47,6 @@
     }
 
     &__container::after {
-        padding: 8px;
-
         content: '';
         position: absolute;
         z-index: -1;
@@ -81,7 +79,7 @@
         box-sizing: border-box;
 
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
     }
 
     &__dates {
@@ -123,6 +121,59 @@
             font-size: 24px;
             line-height: 28px;
         }
+    }
+
+    &__actions {
+        margin-left: auto;
+        display: flex;
+        flex-direction: row;
+        gap: var(--gap);
+
+        align-items: center;
+    }
+
+    &__delete {
+        background: 0;
+        border: 0;
+        padding: 8px;
+        box-sizing: border-box;
+
+        img {
+            object-fit: contain;
+            width: 30px;
+            height: 30px;
+        }
+
+        opacity: 80%;
+        transform: scale(80%);
+        transition: all 0.5s ease;
+    }
+
+    &__delete:hover {
+        opacity: 100%;
+        transform: scale(100%);
+    }
+
+    &__edit {
+        background: 0;
+        border: 0;
+        padding: 8px;
+        box-sizing: border-box;
+
+        img {
+            object-fit: contain;
+            width: 40px;
+            height: 40px;
+        }
+
+        opacity: 80%;
+        transform: scale(80%);
+        transition: all 0.5s ease;
+    }
+
+    &__edit:hover {
+        opacity: 100%;
+        transform: scale(100%);
     }
 }
 

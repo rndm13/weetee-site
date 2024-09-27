@@ -6,8 +6,9 @@
 
 <section class="post">
     <div class="container post__container">
+        <h2 class="post__title"> {{ $post->title }}</h2>
+
         <div class="post__header">
-            <h2 class="post__title"> {{ $post->title }}</h2>
 
             <div class="post__dates">
                 <a class="post__author link" href="/account/{{ $post->user->id }}"> By {{ $post->user->name }} </a>
@@ -16,6 +17,17 @@
                     <p class="post__date"> Edited on @date($post->modified_at) </p>
                 @endif
             </div>
+            @auth
+                @if (Auth::user()->id == $post->user->id)
+                <div class="post__actions">
+                    <form action="/post/delete/{{ $post->id }}" method="POST">
+                        @csrf
+                        <button class="post__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
+                    </form>
+                    <a class="post__edit" href="/post/edit/{{ $post->id }}"> <img src={{ Vite::image("edit.svg") }} /> </a>
+                </div>
+                @endif
+            @endauth
         </div>
 
         <div class="post__description">
