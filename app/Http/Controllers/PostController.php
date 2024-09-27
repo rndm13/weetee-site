@@ -7,6 +7,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -56,8 +57,11 @@ class PostController extends Controller
         return to_route('post.show', $post->id);
     }
 
-    public function create_form(): View
+    public function create_form(): View|RedirectResponse
     {
+        if (!Auth::check()) {
+            return redirect()->route('account.login');
+        }
         return view('post.create');
     }
 

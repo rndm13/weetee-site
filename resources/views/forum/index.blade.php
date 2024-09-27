@@ -9,8 +9,7 @@
         <h2 class="forum__title">Forum</h2>
 
         <p class="forum__create">
-            Have a question or would like to request a feature?
-            <a href="/post/create">Create your own post</a>
+            Have a question or would like to request a feature? <a href="/post/create" class="link"> Create your own post </a>
         </p>
 
         <ul class="posts">

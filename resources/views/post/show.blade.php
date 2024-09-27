@@ -22,6 +22,7 @@
             {{ $post->description }}
         </div>
 
+        @auth
         <form class="form" action="/comment/create/{{ $post->id }}" method="POST">
             @csrf
 
@@ -39,6 +40,7 @@
 
             <button class="form__submit">Send</button>
         </form>
+        @endauth
 
         <div class="comments">
             @foreach ($post->comments as $comment)

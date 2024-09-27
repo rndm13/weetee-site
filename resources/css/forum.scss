@@ -20,11 +20,21 @@
     }
 
     &__create {
+        display: inline-block;
+
         color: var(--fg-color);
         font-family: 'DM Sans', sans-serif;
         font-weight: 500;
         font-size: 24px;
         line-height: 36px;
+
+        .link {
+            font-size: 24px;
+            line-height: 36px;
+            width: fit-content;
+
+            color: var(--silenced-fg-color);
+        }
     }
 }
 
