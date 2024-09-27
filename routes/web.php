@@ -8,13 +8,15 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ForumController;
 
 Route::get('/', [HomeController::class, 'show'])->name('index');
-Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
-Route::get('/post/create/', [PostController::class, 'create_form'])->name('post.create_form');
-Route::get('/post/edit/{id}', [PostController::class, 'edit_form'])->name('post.edit_form');
+Route::get('/post/create', [PostController::class, 'create_form'])->name('post.create_form');
+Route::post('/post/create', [PostController::class, 'create'])->name('post.create');
 
-Route::post('/post/', [PostController::class, 'create'])->name('post.create');
-Route::put('/post/{id}', [PostController::class, 'edit'])->name('post.edit');
-Route::delete('/post/{id}', [PostController::class, 'delete'])->name('post.delete');
+Route::get('/post/edit/{id}', [PostController::class, 'edit_form'])->name('post.edit_form');
+Route::put('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+Route::delete('/post/edit/{id}', [PostController::class, 'delete'])->name('post.delete');
+
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+
 
 Route::get('/forum', [ForumController::class, 'show'])->name('forum.index');
 

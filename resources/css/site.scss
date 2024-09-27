@@ -158,8 +158,9 @@ body {
         color: var(--fg-color);
     }
 
-    &__group > input {
+    &__group > input,textarea {
         min-width: 300px;
+        max-width: 500px;
         padding: 4px;
 
         background: 0;

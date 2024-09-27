@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -17,7 +18,7 @@ class PostController extends Controller
             return http_response_code(404);
         }
 
-        return view('post', ['post' => $post]);
+        return view('post.show', ['post' => $post]);
     }
 
     public function delete(int $id): RedirectResponse
@@ -63,6 +64,7 @@ class PostController extends Controller
 
         $post->title = $request->input('title');
         $post->description = $request->input('description');
+        $post->user_id = Auth::id();
         $post->save();
 
         return to_route('post.show', $post->id);
