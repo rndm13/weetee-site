@@ -1,13 +1,14 @@
 .footer {
+    @extend %container-wrapper;
     background: var(--sec-bg-color);
 
-    width: 100vw;
     border-top: var(--border-size) solid var(--border-color);
-}
 
-.footer > .container {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding: 8px 32px;
+
+    .container {
+        align-items: start;
+    }
 }
 
 .footer__nav {

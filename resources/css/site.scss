@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
 
     background: var(--bg-color);
 }
@@ -16,15 +17,6 @@ body {
     box-sizing: border-box;
 
     min-height: 100vh;
-}
-
-.container {
-    max-width: var(--container-width);
-
-    padding: var(--padding);
-
-    display: flex;
-    flex-direction: column;
 }
 
 .link {
