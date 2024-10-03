@@ -1,5 +1,6 @@
 .footer {
     @extend %container-wrapper;
+
     background: var(--sec-bg-color);
 
     border-top: var(--border-size) solid var(--border-color);
