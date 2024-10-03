@@ -112,6 +112,9 @@ body {
 }
 
 .form {
+    @extend .container;
+    max-width: 720px;
+
     padding: 20px;
     position: relative;
     display: flex;
@@ -145,6 +148,7 @@ body {
 
     &__group {
         width: 100%;
+
         display: flex;
         flex-flow: column;
         justify-items: center;
@@ -162,8 +166,11 @@ body {
     }
 
     &__group > input,textarea {
-        min-width: 300px;
-        max-width: 500px;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        box-sizing: border-box;
+
         padding: 8px 4px;
 
         background: 0;

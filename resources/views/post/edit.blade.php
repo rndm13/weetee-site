@@ -24,7 +24,7 @@
 
             <div class="form__group">
                 <label for="description">Description</label>
-                <textarea type="text" name="description">{{ $post->title }}</textarea>
+                <textarea type="text" name="description">{{ $post->description }}</textarea>
                 <p class="form__error">
                 @error('description')
                     {{ $message }}

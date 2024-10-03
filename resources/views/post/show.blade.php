@@ -5,7 +5,7 @@
 @section("content")
 
 <section class="post">
-    <div class="container post__container">
+    <div class="container">
         <h2 class="post__title"> {{ $post->title }}</h2>
 
         <div class="post__header">
@@ -13,8 +13,8 @@
             <div class="post__dates">
                 <a class="post__author link" href="/account/{{ $post->user->id }}"> By {{ $post->user->name }} </a>
                 <p class="post__date"> Created on @date($post->created_at) </p>
-                @if ($post->modified_at)
-                    <p class="post__date"> Edited on @date($post->modified_at) </p>
+                @if ($post->updated_at != null)
+                    <p class="post__date"> Edited on @date($post->updated_at) </p>
                 @endif
             </div>
             @auth
@@ -30,12 +30,12 @@
             @endauth
         </div>
 
-        <div class="post__description">
-            {{ $post->description }}
-        </div>
+        <p class="post__description">
+            {!! nl2br(e($post->description)) !!}
+        </p>
 
         @auth
-        <form class="form" action="/comment/create/{{ $post->id }}" method="POST">
+        <form class="form comment-form" action="/comment/create/{{ $post->id }}" method="POST">
             @csrf
 
             <h3 class="form__title"> Leave your own comment!</h3>
@@ -60,11 +60,11 @@
                 <div class="comment__header">
                     <a class="comment__author link" href="/account/{{ $comment->user->id }}"> By {{ $comment->user->name }} </a>
                     <p class="comment__date"> Created on @date($comment->created_at) </p>
-                    @if ($comment->modified_at)
-                        <p class="comment__date"> Edited on @date($comment->modified_at) </p>
+                    @if ($comment->updated_at)
+                        <p class="comment__date"> Edited on @date($comment->updated_at) </p>
                     @endif
                 </div>
-                <p class="comment__description"> {{ $comment->description }} </p>
+                <p class="comment__description"> {!! nl2br(e($comment->description)) !!} </p>
             </div>
             @endforeach
         </div>

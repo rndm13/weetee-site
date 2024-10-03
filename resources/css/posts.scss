@@ -10,30 +10,20 @@
 }
 
 .post {
+    @extend %container-wrapper;
+
+    padding-top: 120px;
     min-width: 0;
     width: 100vw;
 
     position: relative;
     margin-bottom: 40px;
 
-    &__container {
-        margin: 40px 120px;
-        padding: 24px;
+    .container {
         position: relative;
-
-        display: flex;
-
-        flex-direction: column;
-        align-items: center;
-
-        gap: var(--big-gap);
-
-        @media only screen and (max-width: 40em) {
-            margin: 40px 8px;
-        }
     }
 
-    &__container::after {
+    .container::after {
         content: '';
         position: absolute;
         z-index: -1;
@@ -47,9 +37,13 @@
         border-radius: var(--rounding);
         background: var(--sec-bg-color);
         opacity: 100%;
+
+        border: var(--border-size) solid var(--silenced-fg-color);
+        box-sizing: border-box;
     }
 
     &__title {
+        padding: 40px 0 20px;
         width: 100%;
 
         font-family: 'DM Sans', sans-serif;
@@ -62,6 +56,7 @@
     }
 
     &__header {
+        padding: 0 36px 36px;
         width: 100%;
         box-sizing: border-box;
 
@@ -76,6 +71,9 @@
     }
 
     &__author {
+        font-weight: 900;
+        font-size: 28px;
+
         width: fit-content;
     }
 
@@ -91,6 +89,8 @@
     }
 
     &__description {
+        box-sizing: border-box;
+        padding: 0 36px;
         width: 100%;
 
         font-family: 'DM Sans', sans-serif;
@@ -101,13 +101,6 @@
         text-justify: inter-word;
 
         color: var(--fg-color);
-    }
-
-    .form {
-        &__title {
-            font-size: 24px;
-            line-height: 28px;
-        }
     }
 
     &__actions {
@@ -164,16 +157,32 @@
     }
 }
 
+.comment-form {
+    padding: 80px 0 20px 0;
+
+    &__title {
+        font-size: 24px;
+        line-height: 28px;
+    }
+}
+
 .comments {
+    box-sizing: border-box;
     width: 100%;
+    padding: 36px 0;
+    box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
+    align-items: center;
+
     gap: var(--big-gap);
 }
 
 .comment {
     width: 100%;
+    max-width: 720px;
+    padding: 20px 0;
 
     &__header {
         display: flex;
@@ -182,10 +191,15 @@
     }
 
     &__author {
+        font-weight: 900;
+        font-size: 28px;
+
         width: fit-content;
     }
 
     &__date {
+        margin-left: auto;
+
         font-family: 'DM Sans', sans-serif;
         font-size: 20px;
         line-height: 24px;
@@ -197,6 +211,7 @@
     }
 
     &__description {
+        padding-top: 8px;
         font-family: 'DM Sans', sans-serif;
         font-size: 20px;
         line-height: 24px;
