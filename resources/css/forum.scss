@@ -1,7 +1,13 @@
 .forum {
-    width: 100%;
+    @extend %container-wrapper;
+
+    .container {
+        max-width: 1280px;
+    }
 
     &__title {
+        padding: 80px 0 40px 0;
+
         font-family: 'DM Sans', sans-serif;
         font-weight: 900;
         font-size: 40px;
@@ -10,16 +16,12 @@
         color: var(--fg-color);
     }
 
-    &__container {
-        padding: 40px 40px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        gap: var(--big-gap);
-    }
-
     &__create {
+        display: flex;
+        flex-direction: row;
+
+        padding: 0 0 20px 0;
+        width: 100%;
         display: inline-block;
 
         color: var(--fg-color);
@@ -39,19 +41,32 @@
 }
 
 .posts {
+    box-sizing: border-box;
+
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 3fr;
+    grid-template-columns: 3fr 1fr 1fr;
 
     gap: var(--gap);
 
     padding: 8px;
 
     border: var(--border-size) solid var(--silenced-fg-color);
-    border-radius: var(--rounding);
+    // border-radius: var(--rounding);
 
     align-items: center;
     justify-items: center;
+
+    &__title {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+
+        text-decoration: none;
+
+        color: var(--fg-color);
+    }
 
     &__creation {
         font-family: 'DM Sans', sans-serif;
@@ -74,16 +89,6 @@
         color: var(--silenced-fg-color);
     }
 
-    &__title {
-        font-family: 'DM Sans', sans-serif;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-
-        text-decoration: none;
-
-        color: var(--fg-color);
-    }
 
     &__separator:not(:last-child) {
         content: ' ';

@@ -30,14 +30,15 @@
                         </div>
                     @endif
                 </div>
+
+                <button class="menu__button">
+                <img src={{ Vite::asset('resources/imgs/menu.svg') }} alt="Menu">
+                </button>
             </nav>
+
         </div>
 
-        <div class="menu">
-            <button class="menu__button">
-                <img src={{ Vite::asset('resources/imgs/menu.svg') }} alt="Menu">
-            </button>
-
+        <div class="menu" id="menu">
             <div class="menu__hidden">
                 <div class="container">
                     @if (!Auth::check())

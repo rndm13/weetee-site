@@ -57,19 +57,26 @@
 }
 
 .menu {
+    &__button {
+        display: none;
+    }
+
     display: none;
 }
 
 /* Phone */
 @media only screen and (max-width: 50em) {
-    .header__nav {
+    .header__nav > .link,.auth-nav {
         display: none;
     }
 
     .menu {
-        margin-left: auto;
-
         display: initial;
+
+        &__button {
+            margin-left: auto;
+            display: block;
+        }
     }
 
     .menu__button > img {
@@ -120,6 +127,11 @@
         content: ' ';
         width: 100%;
         border-top: var(--border-size) solid var(--silenced-fg-color);
+    }
+
+    .container {
+        padding-top: 12px;
+        align-items: start;
     }
 }
 

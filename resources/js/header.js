@@ -7,11 +7,7 @@ $(document).ready(function() {
 
         $(this).attr('data-clicked', clicked);
 
-        if ($(this).parent().hasClass('menu')) {
-            $(this).parent().attr('data-open', clicked);
-            $("body").attr('data-menu-open', clicked);
-        } else {
-            console.warn("menu__button not inside menu");
-        }
+        $("#menu").attr('data-open', clicked);
+        $("body").attr('data-menu-open', clicked);
     });
 });
