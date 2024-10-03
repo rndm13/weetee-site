@@ -97,21 +97,33 @@ $(document).ready(function() {
             const gap_sines = 170;
 
             const padding_left = 10;
-            const gap_points = 4;
-            const base_width_points = 10;
+            const base_gap_points = 4;
             const base_height = 70;
 
             for (let i = 0; i * gap_sines + padding_top < canvas.height; i++) {
                 const top = i * gap_sines + padding_top;
-                const type = i % 3;
+                const type = i % 4;
 
-                const width_points = base_width_points * (type + 1) / 2;
-                for (let j = 0; j * (gap_points + width_points) + padding_left < canvas.width; j++) {
-                    const left = j * (gap_points + width_points) + padding_left;
-                    const phase = type * 2;
-                    const speed = type / 100 + 0.5;
-                    const max_height = Math.max(base_height, base_height * (j / 100));
-                    const height = Math.sin(j / (4 + type / 3) + -t * speed + phase) * max_height;
+                const gap_points = base_gap_points * (type + 1);
+                for (let j = 0; j * (gap_points + gap_points) + padding_left < canvas.width; j++) {
+
+                    const phase_start = type * 3;
+                    const speed_start = type / 100 + 0.5;
+                    const max_height_start = base_height / (type + 4);
+
+                    const sine_start = Math.sin(j / (4 + type / 3) + -t * speed_start + phase_start);
+
+                    const height_start = sine_start * max_height_start;
+                    const left_start = (sine_start / (Math.PI * 8) + 1) * j * (gap_points + gap_points) + padding_left;
+
+                    const phase_end = type * 3;
+                    const speed_end = type / 100 + 0.5;
+                    const max_height_end = base_height;
+
+                    const sine_end = Math.sin(j / (4 + type / 3) + -t * speed_end + phase_end);
+                    const height_end = sine_end * max_height_end;
+
+                    const left_end = (sine_end / (Math.PI * 8) + 1) * j * (gap_points + gap_points) + padding_left;
 
                     ctx.beginPath();
 
@@ -120,8 +132,8 @@ $(document).ready(function() {
                     const color = lerpColor(1 - (top / canvas.height), "#531253", "#33032F");
                     ctx.strokeStyle = color;
 
-                    ctx.moveTo(left, top);
-                    ctx.lineTo(left, top + height);
+                    ctx.moveTo(left_start, top + height_start);
+                    ctx.lineTo(left_end, top + height_end);
 
                     ctx.stroke();
                 }

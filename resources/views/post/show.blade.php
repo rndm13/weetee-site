@@ -55,6 +55,7 @@
         @endauth
 
         <div class="comments">
+            <h3 class="comments__title"> Comments </h3>
             @foreach ($post->comments as $comment)
             <div class="comment">
                 <div class="comment__header">

@@ -38,7 +38,6 @@
         background: var(--sec-bg-color);
         opacity: 100%;
 
-        border: var(--border-size) solid var(--silenced-fg-color);
         box-sizing: border-box;
     }
 
@@ -56,8 +55,8 @@
     }
 
     &__header {
-        padding: 0 36px 36px;
         width: 100%;
+        padding: 36px 0;
         box-sizing: border-box;
 
         display: flex;
@@ -82,7 +81,7 @@
         font-size: 20px;
         line-height: 24px;
 
-        text-align: justify;
+        text-align: start;
         text-justify: inter-word;
 
         color: var(--silenced-fg-color);
@@ -90,7 +89,6 @@
 
     &__description {
         box-sizing: border-box;
-        padding: 0 36px;
         width: 100%;
 
         font-family: 'DM Sans', sans-serif;
@@ -115,7 +113,6 @@
     &__delete {
         background: 0;
         border: 0;
-        padding: 8px;
         box-sizing: border-box;
 
         img {
@@ -137,7 +134,6 @@
     &__edit {
         background: 0;
         border: 0;
-        padding: 8px;
         box-sizing: border-box;
 
         img {
@@ -188,11 +184,13 @@
         display: flex;
         flex-direction: row;
         gap: var(--gap);
+        align-items: center;
     }
 
     &__author {
         font-weight: 900;
         font-size: 28px;
+        line-height: 32px;
 
         width: fit-content;
     }
@@ -204,7 +202,7 @@
         font-size: 20px;
         line-height: 24px;
 
-        text-align: justify;
+        text-align: start;
         text-justify: inter-word;
 
         color: var(--silenced-fg-color);

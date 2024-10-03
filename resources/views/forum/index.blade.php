@@ -5,6 +5,7 @@
 @section("content")
 
 <section class="forum" id="forum">
+    <canvas class="sine-background"> </canvas>
     <div class="container">
         <h2 class="forum__title">Forum</h2>
 
