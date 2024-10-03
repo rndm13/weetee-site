@@ -6,7 +6,7 @@
 
 <section class="register" id="register">
     <canvas class="line-background"></canvas>
-    <div class="container register__container">
+    <div class="container">
         <form action="/register" method="POST" class="form">
             @csrf
 

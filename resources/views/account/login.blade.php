@@ -6,7 +6,7 @@
 
 <section class="login" id="login">
     <canvas class="line-background"></canvas>
-    <div class="container login__container">
+    <div class="container">
         <form action="/login" method="POST" class="form">
             @csrf
 

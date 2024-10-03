@@ -6,7 +6,7 @@
 
 <section class="form-post" id="create-post">
     <canvas class="sine-background"></canvas>
-    <div class="container form-post__container">
+    <div class="container">
         <form action="/post/create" method="POST" class="form">
             @csrf
 
