@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -77,7 +78,11 @@ class AccountController extends Controller
     public function profile($id): View
     {
         $user = User::find($id);
-        return view('account.profile', ['user' => $user]);
+
+        $posts = Post::where('user_id', $id)->orderBy('created_at', 'desc')->paginate();
+        $comments = Comment::where('user_id', $id)->orderBy('created_at', 'desc')->paginate();
+
+        return view('account.profile', ['user' => $user, 'posts' => $posts, 'comments' => $comments]);
     }
 
     public function edit_account($id, $request): RedirectResponse
