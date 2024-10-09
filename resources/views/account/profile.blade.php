@@ -7,7 +7,7 @@
 <section class="profile" id="profile">
     <div class="container">
         <div class="profile__header">
-            <h3 class="profile__role"> TBA </h3>
+            <h3 class="profile__role"> {{ucfirst($user->role)}} </h3>
             <h2 class="profile__name"> {{$user->name}} </h2>
             <div class="profile__date"> Created on @date($user->created_at) </div>
         </div>

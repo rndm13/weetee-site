@@ -7,6 +7,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -15,6 +16,7 @@ class PostController extends Controller
     public function show(int $id): View
     {
         $post = Post::find($id);
+
         $comments = Comment::where('post_id', $id)->orderBy('created_at', 'desc')->paginate();
 
         if ($post == null) {
@@ -26,9 +28,17 @@ class PostController extends Controller
 
     public function delete(int $id): RedirectResponse
     {
-        $deleted = Post::destroy($id);
+        $post = Post::find($id);
 
-        // TODO: Auth for post deletion
+        if ($post === null) {
+            return abort(404);
+        }
+
+        if (!Gate::allows('delete-post', $post)) {
+            return abort(403);
+        }
+
+        $deleted = Post::destroy($id);
 
         return to_route('index');
     }
@@ -46,14 +56,20 @@ class PostController extends Controller
 
     public function edit(int $id, Request $request): RedirectResponse
     {
+        $post = Post::find($id);
+
+        if ($post === null) {
+            return abort(404);
+        }
+
+        if (!Gate::allows('update-post', $post)) {
+            return abort(403);
+        }
+
         $credentials = $request->validate([
             'title' => ['required'],
             'description' => ['required'],
         ]);
-
-        $post = Post::find($id);
-
-        // TODO: Auth for post edit
 
         if ($post == null) {
             return to_route('index', status: 404);

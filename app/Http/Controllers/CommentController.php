@@ -7,15 +7,24 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class CommentController extends Controller
 {
     public function delete(int $id): RedirectResponse
     {
-        $deleted = Comment::destroy($id);
+        $comment = Comment::find($id);
 
-        // TODO: Auth for post deletion
+        if ($comment === null) {
+            return abort(404);
+        }
+
+        if (!Gate::allows('delete-comment', $comment)) {
+            return abort(403);
+        }
+
+        $deleted = Comment::destroy($id);
 
         return back();
     }
@@ -28,7 +37,13 @@ class CommentController extends Controller
 
         $comment = Comment::find($id);
 
-        // TODO: Auth for comment edit
+        if ($comment === null) {
+            return abort(404);
+        }
+
+        if (!Gate::allows('update-comment', $comment)) {
+            return abort(403);
+        }
 
         if ($comment == null) {
             return to_route('index', status: 404);

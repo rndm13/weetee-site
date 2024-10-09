@@ -18,15 +18,17 @@
                 @endif
             </div>
             @auth
-                @if (Auth::user()->id == $post->user->id)
                 <div class="post__actions">
+                    @if (Auth::user()->can('delete-post', $post))
                     <form action="/post/delete/{{ $post->id }}" method="POST">
                         @csrf
                         <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
                     </form>
+                    @endif
+                    @if (Auth::user()->can('update-post', $post))
                     <a class="action__edit" href="/post/edit/{{ $post->id }}"> <img src={{ Vite::image("edit.svg") }} /> </a>
+                    @endif
                 </div>
-                @endif
             @endauth
         </div>
 
@@ -68,16 +70,18 @@
                     </div>
 
                     @auth
-                        @if (Auth::user()->id == $comment->user->id)
                         <div class="comment__actions">
+                            @if (Auth::user()->can('delete-comment', $comment))
                             <form action="/comment/delete/{{ $comment->id }}" method="POST">
                                 @csrf
                                 <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
                             </form>
+                            @endif
 
-                            <button class="action__edit"> <img src={{ Vite::image("edit.svg") }} /> </button>
+                            @if (Auth::user()->can('update-comment', $comment))
+                                <button class="action__edit"> <img src={{ Vite::image("edit.svg") }} /> </button>
+                            @endif
                         </div>
-                        @endif
                     @endauth
                 </div>
                 <p class="comment__description"> {!! nl2br(e($comment->description)) !!} </p>
