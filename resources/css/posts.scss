@@ -20,6 +20,7 @@
     margin-bottom: 40px;
 
     .container {
+        padding: 0 80px;
         position: relative;
     }
 
@@ -66,12 +67,14 @@
     &__dates {
         display: flex;
         flex-direction: column;
+        align-items: start;
         gap: var(--gap);
     }
 
     &__author {
         font-weight: 900;
         font-size: 28px;
+        line-height: 32px;;
 
         width: fit-content;
     }
@@ -109,48 +112,48 @@
 
         align-items: center;
     }
+}
 
-    &__delete {
-        background: 0;
-        border: 0;
-        box-sizing: border-box;
+.action__delete {
+    background: 0;
+    border: 0;
+    box-sizing: border-box;
 
-        img {
-            object-fit: contain;
-            width: 30px;
-            height: 30px;
-        }
-
-        opacity: 80%;
-        transform: scale(80%);
-        transition: all 0.5s ease;
+    img {
+        object-fit: contain;
+        width: 30px;
+        height: 30px;
     }
 
-    &__delete:hover {
-        opacity: 100%;
-        transform: scale(100%);
+    opacity: 80%;
+    transform: scale(80%);
+    transition: all 0.5s ease;
+}
+
+.action__delete:hover {
+    opacity: 100%;
+    transform: scale(100%);
+}
+
+.action__edit {
+    background: 0;
+    border: 0;
+    box-sizing: border-box;
+
+    img {
+        object-fit: contain;
+        width: 40px;
+        height: 40px;
     }
 
-    &__edit {
-        background: 0;
-        border: 0;
-        box-sizing: border-box;
+    opacity: 80%;
+    transform: scale(80%);
+    transition: all 0.5s ease;
+}
 
-        img {
-            object-fit: contain;
-            width: 40px;
-            height: 40px;
-        }
-
-        opacity: 80%;
-        transform: scale(80%);
-        transition: all 0.5s ease;
-    }
-
-    &__edit:hover {
-        opacity: 100%;
-        transform: scale(100%);
-    }
+.action__edit:hover {
+    opacity: 100%;
+    transform: scale(100%);
 }
 
 .comment-form {
@@ -195,17 +198,30 @@
         width: fit-content;
     }
 
-    &__date {
-        margin-left: auto;
+    &__dates {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap);
+    }
 
+    &__date {
         font-family: 'DM Sans', sans-serif;
-        font-size: 20px;
-        line-height: 24px;
+        font-size: 16px;
+        line-height: 16px;
 
         text-align: start;
         text-justify: inter-word;
 
         color: var(--silenced-fg-color);
+    }
+
+    &__actions {
+        margin-left: auto;
+        display: flex;
+        flex-direction: row;
+        gap: var(--gap);
+
+        align-items: center;
     }
 
     &__description {
@@ -218,5 +234,19 @@
         text-justify: inter-word;
 
         color: var(--fg-color);
+    }
+
+    .form_edit {
+        display: none;
+    }
+}
+
+.comment[data-edit=true] {
+    :not(.form_edit, .form_edit *) {
+        display: none;
+    }
+
+    .form_edit {
+        display: flex;
     }
 }

@@ -9,3 +9,4 @@ import "./site";
 import "./backgrounds";
 
 import "./login";
+import "./post";

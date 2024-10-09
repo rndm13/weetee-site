@@ -13,7 +13,7 @@
             <div class="post__dates">
                 <a class="post__author link" href="/account/{{ $post->user->id }}"> By {{ $post->user->name }} </a>
                 <p class="post__date"> Created on @date($post->created_at) </p>
-                @if ($post->updated_at != null)
+                @if ($post->updated_at != $post->created_at)
                     <p class="post__date"> Edited on @date($post->updated_at) </p>
                 @endif
             </div>
@@ -22,9 +22,9 @@
                 <div class="post__actions">
                     <form action="/post/delete/{{ $post->id }}" method="POST">
                         @csrf
-                        <button class="post__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
+                        <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
                     </form>
-                    <a class="post__edit" href="/post/edit/{{ $post->id }}"> <img src={{ Vite::image("edit.svg") }} /> </a>
+                    <a class="action__edit" href="/post/edit/{{ $post->id }}"> <img src={{ Vite::image("edit.svg") }} /> </a>
                 </div>
                 @endif
             @endauth
@@ -60,12 +60,45 @@
             <div class="comment">
                 <div class="comment__header">
                     <a class="comment__author link" href="/account/{{ $comment->user->id }}"> By {{ $comment->user->name }} </a>
-                    <p class="comment__date"> Created on @date($comment->created_at) </p>
-                    @if ($comment->updated_at)
-                        <p class="comment__date"> Edited on @date($comment->updated_at) </p>
-                    @endif
+                    <div class="comment__dates">
+                        <p class="comment__date"> Created on @date($comment->created_at) </p>
+                        @if ($comment->updated_at != $comment->created_at)
+                            <p class="comment__date"> Edited on @date($comment->updated_at) </p>
+                        @endif
+                    </div>
+
+                    @auth
+                        @if (Auth::user()->id == $comment->user->id)
+                        <div class="comment__actions">
+                            <form action="/comment/delete/{{ $comment->id }}" method="POST">
+                                @csrf
+                                <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
+                            </form>
+
+                            <button class="action__edit"> <img src={{ Vite::image("edit.svg") }} /> </button>
+                        </div>
+                        @endif
+                    @endauth
                 </div>
                 <p class="comment__description"> {!! nl2br(e($comment->description)) !!} </p>
+
+                <form class="form_edit comment-form" action="/comment/edit/{{ $comment->id }}" method="POST">
+                    @csrf
+
+                    <h3 class="form__title"> Edit comment </h3>
+
+                    <div class="form__group">
+                        <label for="description">Description</label>
+                        <textarea name="description"> {!! nl2br(e($comment->description)) !!} </textarea>
+                        <p class="form__error">
+                        @error('comment')
+                            {{ $message }}
+                        @enderror
+                        </p>
+                    </div>
+
+                    <button class="form__submit">Send</button>
+                </form>
             </div>
             @endforeach
         </div>

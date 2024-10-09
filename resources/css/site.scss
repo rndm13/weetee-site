@@ -227,6 +227,10 @@ body {
     }
 }
 
+.form_edit {
+    @extend .form;
+}
+
 .pagination {
     &__next {
 

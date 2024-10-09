@@ -27,5 +27,5 @@ Route::post('/register', [AccountController::class, 'register'])->name('account.
 Route::get('/logout', [AccountController::class, 'logout'])->name('account.logout');
 
 Route::post('/comment/create/{post_id}', [CommentController::class, 'create'])->name('comment.create');
-Route::put('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
-Route::delete('/comment/edit/{id}', [CommentController::class, 'delete'])->name('comment.delete');
+Route::post('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
+Route::post('/comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
