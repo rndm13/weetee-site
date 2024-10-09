@@ -14,15 +14,14 @@ class PostController extends Controller
 {
     public function show(int $id): View
     {
-        $post = Post::with(['comments' => function($comments) {
-            return $comments->orderBy('created_at')->paginate();
-        }])->find($id);
+        $post = Post::find($id);
+        $comments = Comment::where('post_id', $id)->orderBy('created_at', 'desc')->paginate();
 
         if ($post == null) {
             return http_response_code(404);
         }
 
-        return view('post.show', ['post' => $post]);
+        return view('post.show', ['post' => $post, 'comments' => $comments]);
     }
 
     public function delete(int $id): RedirectResponse

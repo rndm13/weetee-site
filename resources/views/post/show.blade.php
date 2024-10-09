@@ -104,6 +104,22 @@
                 </form>
             </div>
             @endforeach
+
+            <div class="pagination">
+                <a @class([
+                    "pagination__button",
+                    "pagination__button--inactive" => $comments->onFirstPage(),
+                ]) href={{ $comments->previousPageUrl() }}>
+                    <img src={{ Vite::image('previous.svg') }} alt="Previous">
+                </a>
+                <p class="pagination__page"> {{ $comments->currentPage() }} / {{ $comments->lastPage() }} </p>
+                <a @class([
+                    "pagination__button",
+                    "pagination__button--inactive" => $comments->onLastPage(),
+                ]) href={{ $comments->nextPageUrl() }}>
+                    <img src={{ Vite::image('next.svg') }} alt="Next">
+                </a>
+            </div>
         </div>
     </div>
 </section>
