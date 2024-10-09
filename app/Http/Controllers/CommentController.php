@@ -22,16 +22,19 @@ class CommentController extends Controller
 
     public function edit(int $id, Request $request): RedirectResponse
     {
+        $credentials = $request->validate([
+            'description' => ['required'],
+        ]);
+
         $comment = Comment::find($id);
 
         // TODO: Auth for comment edit
-        // TODO: Validate inputs
 
         if ($comment == null) {
             return to_route('index', status: 404);
         }
 
-        $comment->description = $request->input('description');
+        $comment->description = $credentials['description'];
         $comment->save();
 
         return back();
@@ -39,9 +42,13 @@ class CommentController extends Controller
 
     public function create(int $post_id, Request $request): RedirectResponse
     {
+        $credentials = $request->validate([
+            'description' => ['required'],
+        ]);
+
         $comment = new Comment();
 
-        $comment->description = $request->input('description');
+        $comment->description = $credentials['description'];
         $comment->post_id = $post_id;
         $comment->user_id = Auth::id();
 

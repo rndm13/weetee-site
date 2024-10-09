@@ -46,17 +46,21 @@ class PostController extends Controller
 
     public function edit(int $id, Request $request): RedirectResponse
     {
+        $credentials = $request->validate([
+            'title' => ['required'],
+            'description' => ['required'],
+        ]);
+
         $post = Post::find($id);
 
         // TODO: Auth for post edit
-        // TODO: Validate inputs
 
         if ($post == null) {
             return to_route('index', status: 404);
         }
 
-        $post->title = $request->input('title');
-        $post->description = $request->input('description');
+        $post->title = $credentials['title'];
+        $post->description = $request['description'];
         $post->save();
 
         return to_route('post.show', $post->id);
@@ -72,10 +76,15 @@ class PostController extends Controller
 
     public function create(Request $request): RedirectResponse
     {
+        $credentials = $request->validate([
+            'title' => ['required'],
+            'description' => ['required'],
+        ]);
+
         $post = new Post();
 
-        $post->title = $request->input('title');
-        $post->description = $request->input('description');
+        $post->title = $credentials['title'];
+        $post->description = $credentials['description'];
         $post->user_id = Auth::id();
         $post->save();
 
