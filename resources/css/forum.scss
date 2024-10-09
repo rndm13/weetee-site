@@ -68,18 +68,22 @@
     box-sizing: border-box;
 
     width: 100%;
-    display: grid;
-    grid-template-columns: 3fr 1fr 1fr;
 
-    gap: var(--gap);
+    &__list {
+        display: grid;
 
-    padding: 8px;
+        grid-template-columns: 3fr 1fr 1fr;
 
-    border: var(--border-size) solid var(--silenced-fg-color);
-    // border-radius: var(--rounding);
+        gap: var(--gap);
 
-    align-items: center;
-    justify-items: center;
+        padding: 8px;
+
+        border: var(--border-size) solid var(--silenced-fg-color);
+        // border-radius: var(--rounding);
+
+        align-items: center;
+        justify-items: center;
+    }
 
     &__title {
         font-family: 'DM Sans', sans-serif;

@@ -16,5 +16,3 @@ class ForumController extends Controller
         return view('forum.index', ['posts' => $posts]);
     }
 }
-
-?>

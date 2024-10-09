@@ -14,29 +14,25 @@
 
         <p class="profile__section-title"> Posts </p>
 
-        <div class="profile__posts">
-            <ul class="posts">
-                @foreach ($user->posts as $post)
-                    <a class="posts__title" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
-                    <p class="posts__creation">@date($post->created_at)</p>
-                    <a class="posts__username">{{ $post->user->name }}</a>
-                    <hr class="posts__separator"/>
-                @endforeach
-            </ul>
-        </div>
+        <ul class="posts">
+            @foreach ($user->posts as $post)
+                <a class="posts__title" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
+                <p class="posts__creation">@date($post->created_at)</p>
+                <a class="posts__username">{{ $post->user->name }}</a>
+                <hr class="posts__separator"/>
+            @endforeach
+        </ul>
 
         <p class="profile__section-title"> Comments </p>
 
-        <div class="profile__comments">
-            <ul class="posts">
-                @foreach ($user->comments as $comment)
-                    <a class="posts__title" href="/post/view/{{$comment->post_id}}#comment_{{$comment->id}}">{{ $comment->description }}</a>
-                    <p class="posts__creation">@date($comment->created_at)</p>
-                    <a class="posts__username">{{ $comment->user->name }}</a>
-                    <hr class="posts__separator"/>
-                @endforeach
-            </ul>
-        </div>
+        <ul class="posts">
+            @foreach ($user->comments as $comment)
+                <a class="posts__title" href="/post/view/{{$comment->post_id}}#comment_{{$comment->id}}">{{ $comment->description }}</a>
+                <p class="posts__creation">@date($comment->created_at)</p>
+                <a class="posts__username">{{ $comment->user->name }}</a>
+                <hr class="posts__separator"/>
+            @endforeach
+        </ul>
 
         @auth
         <form>
