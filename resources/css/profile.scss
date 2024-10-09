@@ -1,4 +1,4 @@
-.profile o{
+.profile {
     @extend %container-wrapper;
 
     &__header {
@@ -15,6 +15,7 @@
     &__name {
         color: var(--fg-color);
         font-weight: 900;
+        font-family: 'DM Sans', sans-serif;
         font-size: 28px;
         line-height: 32px;
 
@@ -24,6 +25,7 @@
     &__role {
         color: var(--silenced-fg-color);
         font-weight: 900;
+        font-family: 'DM Sans', sans-serif;
         font-size: 20px;
         line-height: 32px;
 
