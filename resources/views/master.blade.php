@@ -25,7 +25,7 @@
                         <a href="/register" class="link">Register</a>
                     @else
                         <div class="user">
-                            <p class="user__name">{{ Auth::user()->name }}</p>
+                            <a class="user__name link" href="/profile/{{ Auth::id() }}">{{ Auth::user()->name }}</a>
                             <a href="/logout" class="link">Logout</a>
                         </div>
                     @endif
@@ -46,7 +46,7 @@
                         <a href="/register" class="link">Register</a>
                     @else
                         <div class="user">
-                            <p class="user__name">{{ Auth::user()->name }}</p>
+                            <a class="user__name link" href="/profile/{{ Auth::id() }}">{{ Auth::user()->name }}</a>
                             <a href="/logout" class="link">Logout</a>
                         </div>
                         <hr class="menu__separator"/>
