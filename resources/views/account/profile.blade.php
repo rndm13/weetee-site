@@ -10,6 +10,21 @@
             <h3 class="profile__role"> {{ucfirst($user->role)}} </h3>
             <h2 class="profile__name"> {{$user->name}} </h2>
             <div class="profile__date"> Created on @date($user->created_at) </div>
+
+            @auth
+            <div class="profile__actions">
+                @if (Auth::user()->can('update-account', $user))
+                    <button class="action__edit"> <img src={{ Vite::image("edit.svg") }} /></button>
+                @endif
+
+                @if (Auth::user()->can('delete-account', $user))
+                    <form action="/account/delete/{{ $user->id }}" method="POST">
+                        @csrf
+                        <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
+                    </form>
+                @endif
+            </div>
+            @endauth
         </div>
 
         <p class="profile__section-title"> Posts </p>
@@ -70,10 +85,6 @@
             </div>
         </div>
 
-        @auth
-        <form>
-        </form>
-        @endauth
     </div>
 </section>
 

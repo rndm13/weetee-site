@@ -13,6 +13,13 @@
         gap: var(--big-gap);
     }
 
+    &__actions {
+        display: flex;
+        gap: var(--gap);
+
+        align-items: center;
+    }
+
     &__name {
         color: var(--fg-color);
         font-weight: 900;

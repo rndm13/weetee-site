@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 
 class AccountController extends Controller
 {
@@ -79,6 +80,10 @@ class AccountController extends Controller
     {
         $user = User::find($id);
 
+        if ($user === null) {
+            return abort(404);
+        }
+
         $posts = Post::where('user_id', $id)->orderBy('created_at', 'desc')->paginate();
         $comments = Comment::where('user_id', $id)->orderBy('created_at', 'desc')->paginate();
 
@@ -95,6 +100,14 @@ class AccountController extends Controller
         ]);
 
         $user = User::find($id);
+
+        if ($user === null) {
+            return abort(404);
+        }
+
+        if (!Gate::allows('edit-account', $user)) {
+            return abort(403);
+        }
 
         if ($credentials['password'] != $credentials['confirm_password']) {
             return back()->withErrors([
@@ -114,12 +127,22 @@ class AccountController extends Controller
 
     public function delete_account($id): RedirectResponse
     {
+        $user = User::find($id);
+
+        if ($user === null) {
+            return abort(404);
+        }
+
+        if (!Gate::allows('delete-account', $user)) {
+            return abort(403);
+        }
+
         if (Auth::id() == $id) {
             Auth::logout();
         }
 
         User::destroy($id);
 
-        return back();
+        return to_route('index');
     }
 }

@@ -45,7 +45,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('delete-post', function (User $user, Post $post) {
-            return $post->user_id === $user->id || $user->role === 'admin' || $user->role === 'moderator';
+            return
+                $post->user_id === $user->id ||
+                $user->role === 'admin' ||
+                $user->role === 'moderator';
         });
 
         Gate::define('update-comment', function (User $user, Comment $comment) {
@@ -53,7 +56,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('delete-comment', function (User $user, Comment $comment) {
-            return $comment->user_id === $user->id || $user->role === 'admin' || $user->role === 'moderator';
+            return
+                $comment->user_id === $user->id ||
+                $user->role === 'admin' ||
+                $user->role === 'moderator';
         });
 
         Gate::define('update-account', function (User $user, User $account) {
@@ -61,7 +67,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('delete-account', function (User $user, User $account) {
-            return $user->id == $account->id || $user->role === 'admin' || $user->role === 'moderator';
+            return
+                $user->id == $account->id ||
+                $user->role === 'admin' ||
+                $user->role === 'moderator' && $user->role === 'user';
         });
     }
 }
