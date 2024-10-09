@@ -57,7 +57,7 @@
         <div class="comments">
             <h3 class="comments__title"> Comments </h3>
             @foreach ($post->comments as $comment)
-            <div class="comment" id="comment_#{{$comment->id}}">
+            <div class="comment" id="comment_{{$comment->id}}">
                 <div class="comment__header">
                     <a class="comment__author link" href="/profile/{{ $comment->user->id }}"> By {{ $comment->user->name }} </a>
                     <div class="comment__dates">
