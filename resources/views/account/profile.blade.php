@@ -13,15 +13,15 @@
 
             @auth
             <div class="profile__actions">
-                @if (Auth::user()->can('update-account', $user))
-                    <button class="action__edit"> <img src={{ Vite::image("edit.svg") }} /></button>
-                @endif
-
                 @if (Auth::user()->can('delete-account', $user))
                     <form action="/account/delete/{{ $user->id }}" method="POST">
                         @csrf
                         <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
                     </form>
+                @endif
+
+                @if (Auth::user()->can('update-account', $user))
+                    <button class="action__edit"> <img src={{ Vite::image("edit.svg") }} /></button>
                 @endif
             </div>
             @endauth
@@ -85,6 +85,63 @@
             </div>
         </div>
 
+        <!-- Edit form -->
+
+        @can('update-account', $user)
+
+        <form class="form_edit" action="/account/edit/{{$user->id}}" method="POST">
+            @csrf
+
+            <div class="form__group">
+                <label for="name">Name</label>
+                <input name="name" value={{ $user->name }} />
+                <p class="form__error">
+                @error('name')
+                    {{ $message }}
+                @enderror
+                </p>
+            </div>
+
+            <div class="form__group">
+                <label for="email">Email</label>
+                <input name="email" type="email" value={{ $user->email }} />
+                <p class="form__error">
+                @error('email')
+                    {{ $message }}
+                @enderror
+                </p>
+            </div>
+
+            <button class="form__submit">Save</button>
+        </form>
+
+        <form class="form_edit" action="/account/edit-password/{{$user->id}}" method="POST">
+            @csrf
+
+            <div class="form__group">
+                <label for="password">Password</label>
+                <input name="password" type="password"/>
+                <p class="form__error">
+                @error('password')
+                    {{ $message }}
+                @enderror
+                </p>
+            </div>
+
+            <div class="form__group">
+                <label for="confirm_password">Confirm password</label>
+                <input name="confirm_password" type="password" />
+                <p class="form__error">
+                @error('confirm_password')
+                    {{ $message }}
+                @enderror
+                </p>
+            </div>
+
+            <button class="form__submit">Save Password</button>
+        </form>
+
+        @endcan
     </div>
 </section>
 

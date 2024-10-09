@@ -86,13 +86,8 @@
                 </div>
                 <p class="comment__description"> {!! nl2br(e($comment->description)) !!} </p>
 
-                <form class="form_edit comment-form" action="/comment/edit/{{ $comment->id }}" method="POST">
+                <form class="form_edit" action="/comment/edit/{{ $comment->id }}" method="POST">
                     @csrf
-
-                    <div class="form__title">
-                        Edit comment
-                        <button type="button" class="action__edit"> <img src={{ Vite::image("edit.svg") }} /> </button>
-                    </div>
 
                     <div class="form__group">
                         <label for="description">Description</label>

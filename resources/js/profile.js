@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    $(".comment__actions .action__edit").on("click", function(e) {
+    $(".profile__actions .action__edit").on("click", function(e) {
         e.preventDefault();
 
-        let comment = $(this).closest(".comment");
+        let comment = $(this).closest(".profile");
         console.log($(this), comment);
 
         let edit_str = comment.attr('data-edit');

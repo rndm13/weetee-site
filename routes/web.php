@@ -28,6 +28,7 @@ Route::get('/logout', [AccountController::class, 'logout'])->name('account.logou
 Route::get('/profile/{id}', [AccountController::class, 'profile'])->name('account.profile');
 
 Route::post('/account/edit/{id}', [AccountController::class, 'edit_account'])->name('account.edit');
+Route::post('/account/edit-password/{id}', [AccountController::class, 'change_password_account'])->name('account.change_password');
 Route::post('/account/delete/{id}', [AccountController::class, 'delete_account'])->name('account.delete');
 
 Route::post('/comment/create/{post_id}', [CommentController::class, 'create'])->name('comment.create');

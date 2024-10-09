@@ -15,7 +15,6 @@
 
     &__actions {
         display: flex;
-        gap: var(--gap);
 
         align-items: center;
     }
@@ -59,5 +58,22 @@
         line-height: 32px;
 
         width: fit-content;
+    }
+
+    .container > .form_edit {
+        @extend .form;
+
+        padding-top: 0;
+        display: none;
+    }
+}
+
+.profile[data-edit=true] > .container {
+    :not(.profile__header, .profile__header *, .form_edit, .form_edit *) {
+        display: none;
+    }
+
+    .form_edit {
+        display: flex;
     }
 }

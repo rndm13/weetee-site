@@ -256,12 +256,15 @@
     }
 
     .form_edit {
+        @extend .form;
+
+        padding-top: 0;
         display: none;
     }
 }
 
 .comment[data-edit=true] {
-    :not(.form_edit, .form_edit *) {
+    :not(.comment__header, .comment__header *, .form_edit, .form_edit *) {
         display: none;
     }
 

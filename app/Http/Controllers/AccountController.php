@@ -11,6 +11,8 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
+
 
 class AccountController extends Controller
 {
@@ -90,13 +92,41 @@ class AccountController extends Controller
         return view('account.profile', ['user' => $user, 'posts' => $posts, 'comments' => $comments]);
     }
 
-    public function edit_account($id, $request): RedirectResponse
+    public function change_password_account(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'name' => ['required', 'unique:users'],
-            'email' => ['required', 'email', 'unique:users'],
             'password' => ['required'],
             'confirm_password' => ['required'],
+        ]);
+
+        if ($credentials['password'] != $credentials['confirm_password']) {
+            return back()->withErrors([
+                'password' => 'Password must be confirmed.',
+            ]);
+        }
+
+        $user = User::find(Auth::id());
+
+        if ($user === null) {
+            return abort(404);
+        }
+
+        if (!Gate::allows('update-account', $user)) {
+            return abort(403);
+        }
+
+        $user->password = Hash::make($credentials['password']);
+
+        $user->save();
+
+        return back();
+    }
+
+    public function edit_account($id, Request $request): RedirectResponse
+    {
+        $credentials = $request->validate([
+            'name' => ['required', Rule::unique('users', 'name')->ignore($id)],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($id)],
         ]);
 
         $user = User::find($id);
@@ -105,20 +135,12 @@ class AccountController extends Controller
             return abort(404);
         }
 
-        if (!Gate::allows('edit-account', $user)) {
+        if (!Gate::allows('update-account', $user)) {
             return abort(403);
         }
 
-        if ($credentials['password'] != $credentials['confirm_password']) {
-            return back()->withErrors([
-                'password' => 'Password must be confirmed.',
-            ])->withInput(['name', 'email']);
-        }
-
-        $user = new User();
         $user->name = $credentials['name'];
         $user->email = $credentials['email'];
-        $user->password = Hash::make($credentials['password']);
 
         $user->save();
 

@@ -10,3 +10,4 @@ import "./backgrounds";
 
 import "./login";
 import "./post";
+import "./profile";
