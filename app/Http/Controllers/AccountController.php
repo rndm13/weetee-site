@@ -16,6 +16,7 @@ class AccountController extends Controller
     {
         return view('account.login');
     }
+
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -38,6 +39,7 @@ class AccountController extends Controller
     {
         return view('account.register');
     }
+
     public function register(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -68,6 +70,50 @@ class AccountController extends Controller
     public function logout(): RedirectResponse
     {
         Auth::logout();
+
+        return back();
+    }
+
+    public function profile($id): View
+    {
+        $user = User::find($id);
+        return view('account.profile', ['user' => $user]);
+    }
+
+    public function edit_account($id, $request): RedirectResponse
+    {
+        $credentials = $request->validate([
+            'name' => ['required', 'unique:users'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required'],
+            'confirm_password' => ['required'],
+        ]);
+
+        $user = User::find($id);
+
+        if ($credentials['password'] != $credentials['confirm_password']) {
+            return back()->withErrors([
+                'password' => 'Password must be confirmed.',
+            ])->withInput(['name', 'email']);
+        }
+
+        $user = new User();
+        $user->name = $credentials['name'];
+        $user->email = $credentials['email'];
+        $user->password = Hash::make($credentials['password']);
+
+        $user->save();
+
+        return back();
+    }
+
+    public function delete_account($id): RedirectResponse
+    {
+        if (Auth::id() == $id) {
+            Auth::logout();
+        }
+
+        User::destroy($id);
 
         return back();
     }

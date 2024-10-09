@@ -144,6 +144,11 @@ body {
         line-height: 36px;
         color: var(--fg-color);
         padding-bottom: var(--big-gap);
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--big-gap);
     }
 
     &__group {

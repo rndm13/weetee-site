@@ -25,7 +25,11 @@ Route::get('/register', [AccountController::class, 'register_form'])->name('acco
 Route::post('/login', [AccountController::class, 'login'])->name('account.login');
 Route::post('/register', [AccountController::class, 'register'])->name('account.register');
 Route::get('/logout', [AccountController::class, 'logout'])->name('account.logout');
+Route::get('/profile/{id}', [AccountController::class, 'profile'])->name('account.profile');
+Route::post('/profile/edit/{id}', [AccountController::class, 'edit_account'])->name('account.edit');
+Route::post('/profile/delete/{id}', [AccountController::class, 'delete_account'])->name('account.delete');
 
 Route::post('/comment/create/{post_id}', [CommentController::class, 'create'])->name('comment.create');
 Route::post('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
 Route::post('/comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
+

@@ -11,7 +11,7 @@
         <div class="post__header">
 
             <div class="post__dates">
-                <a class="post__author link" href="/account/{{ $post->user->id }}"> By {{ $post->user->name }} </a>
+                <a class="post__author link" href="/profile/{{ $post->user->id }}"> By {{ $post->user->name }} </a>
                 <p class="post__date"> Created on @date($post->created_at) </p>
                 @if ($post->updated_at != $post->created_at)
                     <p class="post__date"> Edited on @date($post->updated_at) </p>
@@ -57,9 +57,9 @@
         <div class="comments">
             <h3 class="comments__title"> Comments </h3>
             @foreach ($post->comments as $comment)
-            <div class="comment">
+            <div class="comment" id="comment_#{{$comment->id}}">
                 <div class="comment__header">
-                    <a class="comment__author link" href="/account/{{ $comment->user->id }}"> By {{ $comment->user->name }} </a>
+                    <a class="comment__author link" href="/profile/{{ $comment->user->id }}"> By {{ $comment->user->name }} </a>
                     <div class="comment__dates">
                         <p class="comment__date"> Created on @date($comment->created_at) </p>
                         @if ($comment->updated_at != $comment->created_at)
@@ -85,7 +85,10 @@
                 <form class="form_edit comment-form" action="/comment/edit/{{ $comment->id }}" method="POST">
                     @csrf
 
-                    <h3 class="form__title"> Edit comment </h3>
+                    <div class="form__title">
+                        Edit comment
+                        <button type="button" class="action__edit"> <img src={{ Vite::image("edit.svg") }} /> </button>
+                    </div>
 
                     <div class="form__group">
                         <label for="description">Description</label>

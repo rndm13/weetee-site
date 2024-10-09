@@ -14,13 +14,18 @@
 
     padding-top: 120px;
     min-width: 0;
-    width: 100vw;
 
     position: relative;
     margin-bottom: 40px;
 
     .container {
         padding: 0 80px;
+
+        /* Phone */
+        @media only screen and (max-width: 40em) {
+            padding: 0 12px 0 8px;
+        }
+
         position: relative;
     }
 
@@ -112,6 +117,10 @@
 
         align-items: center;
     }
+
+    .form {
+        padding: 120px 0 0 0;
+    }
 }
 
 .action__delete {
@@ -156,8 +165,8 @@
     transform: scale(100%);
 }
 
-.comment-form {
-    padding: 80px 0 20px 0;
+.form.comment-form {
+    padding-top: 20px;
 
     &__title {
         font-size: 24px;
@@ -176,6 +185,16 @@
     align-items: center;
 
     gap: var(--big-gap);
+
+    &__title {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 900;
+        font-size: 40px;
+        line-height: 44px;
+        text-align: center;
+
+        color: var(--fg-color);
+    }
 }
 
 .comment {
