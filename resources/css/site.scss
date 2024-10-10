@@ -305,7 +305,7 @@ body {
         object-fit: contain;
     }
 
-    :hover {
+    &:hover {
         background: var(--gray-color);
     }
 }
