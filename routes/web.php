@@ -29,6 +29,8 @@ Route::post('/register', [AccountController::class, 'register'])->name('account.
 Route::get('/auth/google/redirect', [AccountController::class, 'google_redirect'])->name('account.google.redirect');
 Route::get('/auth/google/callback', [AccountController::class, 'google_callback'])->name('account.google.callback');
 
+Route::get('/account/confirm/{email}/{token}', [AccountController::class, 'account_confirmation'])->name('account.confirm');
+
 Route::get('/logout', [AccountController::class, 'logout'])->name('account.logout');
 Route::get('/profile/{id}', [AccountController::class, 'profile'])->name('account.profile');
 

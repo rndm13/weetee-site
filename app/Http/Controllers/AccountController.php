@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\AccountConfirmation;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class AccountController extends Controller
 {
@@ -52,6 +60,7 @@ class AccountController extends Controller
         if ($user === null) {
             $user = new User();
             $user->google_id = $googleUser->getId();
+            $user->email_verified_at = Carbon::now();
             $user->email = $googleUser->getEmail();
             $user->name = $googleUser->getName();
             $user->google_token = $googleUser->token;
@@ -84,10 +93,38 @@ class AccountController extends Controller
             ])->withInput(['name', 'email']);
         }
 
+        DB::beginTransaction();
+
         $user = new User();
         $user->name = $credentials['name'];
         $user->email = $credentials['email'];
         $user->password = Hash::make($credentials['password']);
+
+        $user->account_confirmation_token = Str::random();
+
+        $user->save();
+
+        $link = Url::route('account.confirm', ['email' => $user->email, 'token' => $user->account_confirmation_token]);
+
+        Mail::to($user->email)->send(new AccountConfirmation($link));
+
+        DB::commit();
+
+        Auth::login($user);
+
+        return to_route('index');
+    }
+
+    public function account_confirmation(string $email, string $token): RedirectResponse
+    {
+        $user = User::where('email', $email)->whereAnd('account_confirmation_token', $token)->first();
+
+        if ($user === null) {
+            return abort(403);
+        }
+
+        $user->email_verified_at = Carbon::now();
+        $user->account_confirmation_token = null;
 
         $user->save();
 

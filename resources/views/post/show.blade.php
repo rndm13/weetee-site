@@ -36,28 +36,29 @@
             {!! nl2br(e($post->description)) !!}
         </p>
 
-        @auth
-        <form class="form comment-form" action="/comment/create/{{ $post->id }}" method="POST">
-            @csrf
-
-            <h3 class="form__title"> Leave your own comment!</h3>
-
-            <div class="form__group">
-                <label for="description">Description</label>
-                <textarea name="description"></textarea>
-                <p class="form__error">
-                @error('comment')
-                    {{ $message }}
-                @enderror
-                </p>
-            </div>
-
-            <button class="form__submit">Send</button>
-        </form>
-        @endauth
-
         <div class="comments">
             <h3 class="comments__title"> Comments </h3>
+
+            @auth
+            <form class="form comment-form" action="/comment/create/{{ $post->id }}" method="POST">
+                @csrf
+
+                <h3 class="form__title"> Leave your own comment!</h3>
+
+                <div class="form__group">
+                    <label for="description">Description</label>
+                    <textarea name="description"></textarea>
+                    <p class="form__error">
+                    @error('comment')
+                        {{ $message }}
+                    @enderror
+                    </p>
+                </div>
+
+                <button class="form__submit">Send</button>
+            </form>
+            @endauth
+
             @foreach ($post->comments as $comment)
             <div class="comment" id="comment_{{$comment->id}}">
                 <div class="comment__header">
