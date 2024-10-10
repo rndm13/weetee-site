@@ -54,6 +54,13 @@
 
             <button class="form__submit" id="register-submit">Register</button>
 
+            <div class="register__auth">
+                <a class="button--auth-google" href="/auth/google/redirect">
+                    <img src={{ Vite::image('google.png') }} alt="Google">
+                    Login with Google
+                </a>
+            </div>
+
             <div class="register__links">
                 <a class="link" href="/login">Already have an account? Login now.</a>
             </div>

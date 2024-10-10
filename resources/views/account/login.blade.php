@@ -34,6 +34,13 @@
 
             <button class="form__submit" id="login-submit">Login</button>
 
+            <div class="login__auth">
+                <a class="button--auth-google" href="/auth/google/redirect">
+                    <img src={{ Vite::image('google.png') }} alt="Google">
+                    Login with Google
+                </a>
+            </div>
+
             <div class="login__links">
                 <a class="link" href="/password_recovery">Forgot your password?</a>
                 <a class="link" href="/register">Don't have an account? Register now.</a>

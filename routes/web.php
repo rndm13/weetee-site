@@ -21,9 +21,14 @@ Route::get('/post/view/{id}', [PostController::class, 'show'])->name('post.show'
 Route::get('/forum', [ForumController::class, 'show'])->name('forum.index');
 
 Route::get('/login', [AccountController::class, 'login_form'])->name('account.login_form');
-Route::get('/register', [AccountController::class, 'register_form'])->name('account.register_form');
 Route::post('/login', [AccountController::class, 'login'])->name('account.login');
+
+Route::get('/register', [AccountController::class, 'register_form'])->name('account.register_form');
 Route::post('/register', [AccountController::class, 'register'])->name('account.register');
+
+Route::get('/auth/google/redirect', [AccountController::class, 'google_redirect'])->name('account.google.redirect');
+Route::get('/auth/google/callback', [AccountController::class, 'google_callback'])->name('account.google.callback');
+
 Route::get('/logout', [AccountController::class, 'logout'])->name('account.logout');
 Route::get('/profile/{id}', [AccountController::class, 'profile'])->name('account.profile');
 

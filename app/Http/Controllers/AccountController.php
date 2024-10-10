@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
-
+use Laravel\Socialite\Facades\Socialite;
 
 class AccountController extends Controller
 {
@@ -37,6 +37,31 @@ class AccountController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }
+
+    public function google_redirect(): RedirectResponse
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function google_callback(Request $request): RedirectResponse
+    {
+        $googleUser = Socialite::driver('google')->stateless()->user();
+        $user = User::where('email', $googleUser->getEmail())->whereOr('google_id', $googleUser->getId())->first();
+
+        if ($user === null) {
+            $user = new User();
+            $user->google_id = $googleUser->getId();
+            $user->email = $googleUser->getEmail();
+            $user->name = $googleUser->getName();
+            $user->google_token = $googleUser->token;
+            $user->google_refresh_token = $googleUser->refreshToken;
+        }
+
+        Auth::login($user);
+        session()->regenerate();
+
+        return to_route('index');
     }
 
     public function register_form(Request $request): View
