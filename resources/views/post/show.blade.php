@@ -40,31 +40,34 @@
         <p class="post__description">
             {!! nl2br(e($post->description)) !!}
         </p>
+    </div>
+</section>
 
-        <div class="comments" data-edit={{ !$errors->isEmpty() ? "true" : "false" }}>
-            <h3 class="comments__title"> Comments </h3>
+<section class="comments" data-edit={{ !$errors->isEmpty() ? "true" : "false" }}>
+    <h3 class="comments__title"> Comments </h3>
 
-            @auth
-            <form class="form comment-form" action="/comment/create/{{ $post->id }}" method="POST">
-                @csrf
+    @auth
+    <form class="form comment-form" action="/comment/create/{{ $post->id }}" method="POST">
+        @csrf
 
-                <h3 class="form__title"> Leave your own comment!</h3>
+        <h3 class="form__title"> Leave your own comment!</h3>
 
-                <div class="form__group">
-                    <label for="description">Description</label>
-                    <textarea name="description"></textarea>
-                    <p class="form__error">
-                    @error('comment')
-                        {{ $message }}
-                    @enderror
-                    </p>
-                </div>
+        <div class="form__group">
+            <label for="description">Description</label>
+            <textarea name="description"></textarea>
+            <p class="form__error">
+            @error('comment')
+                {{ $message }}
+            @enderror
+            </p>
+        </div>
 
-                <button class="form__submit">Send</button>
-            </form>
-            @endauth
+        <button class="form__submit">Send</button>
+    </form>
+    @endauth
 
-            @foreach ($post->comments as $comment)
+    <div class="container">
+        @foreach ($post->comments as $comment)
             <div class="comment" id="comment_{{$comment->id}}">
                 <div class="comment__header">
                     <a class="comment__author link" href="/profile/{{ $comment->user->id }}"> By {{ $comment->user->name }} </a>
@@ -108,23 +111,22 @@
                     <button class="form__submit">Send</button>
                 </form>
             </div>
-            @endforeach
+        @endforeach
 
-            <div class="pagination">
-                <a @class([
-                    "pagination__button",
-                    "pagination__button--inactive" => $comments->onFirstPage(),
-                ]) href={{ $comments->previousPageUrl() }}>
-                    <img src={{ Vite::image('previous.svg') }} alt="Previous">
-                </a>
-                <p class="pagination__page"> {{ $comments->currentPage() }} / {{ $comments->lastPage() }} </p>
-                <a @class([
-                    "pagination__button",
-                    "pagination__button--inactive" => $comments->onLastPage(),
-                ]) href={{ $comments->nextPageUrl() }}>
-                    <img src={{ Vite::image('next.svg') }} alt="Next">
-                </a>
-            </div>
+        <div class="pagination">
+            <a @class([
+                "pagination__button",
+                "pagination__button--inactive" => $comments->onFirstPage(),
+            ]) href={{ $comments->previousPageUrl() }}>
+                <img src={{ Vite::image('previous.svg') }} alt="Previous">
+            </a>
+            <p class="pagination__page"> {{ $comments->currentPage() }} / {{ $comments->lastPage() }} </p>
+            <a @class([
+                "pagination__button",
+                "pagination__button--inactive" => $comments->onLastPage(),
+            ]) href={{ $comments->nextPageUrl() }}>
+                <img src={{ Vite::image('next.svg') }} alt="Next">
+            </a>
         </div>
     </div>
 </section>
