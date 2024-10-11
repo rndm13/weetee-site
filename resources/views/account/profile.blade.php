@@ -29,18 +29,18 @@
 
         <p class="profile__section-title"> Posts </p>
 
-        <div class="posts">
-            <ul class="posts__list">
+        <div class="collection-posts">
+            <ul class="collection-posts__list">
 	            @foreach ($posts as $post)
-	                <a class="posts__username">{{ $post->user->name }}</a>
-	                <a class="posts__title" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
-                    <div class="posts__categories">
+	                <a class="collection-posts__username">{{ $post->user->name }}</a>
+	                <a class="collection-posts__title" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
+                    <div class="collection-posts__categories">
                         @foreach ($post->categories as $category)
                             <a class="category" href="/forum?category={{$category->id}}"> {{ $category->title }}</a>
                         @endforeach
                     </div>
-	                <p class="posts__creation">@date($post->created_at)</p>
-	                <hr class="posts__separator"/>
+	                <p class="collection-posts__creation">@date($post->created_at)</p>
+	                <hr class="collection-posts__separator"/>
 	            @endforeach
 	        </ul>
 
@@ -63,13 +63,13 @@
 
         <p class="profile__section-title"> Comments </p>
 
-        <div class="posts">
-            <ul class="posts__list">
+        <div class="collection-comments">
+            <ul class="collection-comments__list">
 	            @foreach ($comments as $comment)
-	                <a class="posts__title" href="/post/view/{{$comment->post_id}}#comment_{{$comment->id}}">{{ $comment->description }}</a>
-	                <p class="posts__creation">@date($comment->created_at)</p>
-	                <a class="posts__username">{{ $comment->user->name }}</a>
-	                <hr class="posts__separator"/>
+	                <a class="collection-comments__title" href="/post/view/{{$comment->post_id}}#comment_{{$comment->id}}">{{ $comment->description }}</a>
+	                <p class="collection-comments__creation">@date($comment->created_at)</p>
+	                <a class="collection-comments__username">{{ $comment->user->name }}</a>
+	                <hr class="collection-comments__separator"/>
 	            @endforeach
 	        </ul>
 

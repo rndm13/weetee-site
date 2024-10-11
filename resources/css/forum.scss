@@ -64,7 +64,7 @@
     }
 }
 
-.posts {
+@mixin collection($template_columns) {
     box-sizing: border-box;
 
     width: 100%;
@@ -72,7 +72,7 @@
     &__list {
         display: grid;
 
-        grid-template-columns: 1fr 2fr 3fr 1fr;
+        grid-template-columns: $template_columns;
 
         gap: var(--gap);
 
@@ -137,6 +137,14 @@
     &__separator:last-child {
         display: none;
     }
+}
+
+.collection-posts {
+    @include collection(1fr 2fr 3fr 1fr);
+}
+
+.collection-comments {
+    @include collection(1fr 3fr 1fr);
 }
 
 .category {

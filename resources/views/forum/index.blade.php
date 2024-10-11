@@ -14,18 +14,18 @@
             <a href="/post/create" class="link"> Create your own post </a>
         </div>
 
-        <div class="posts">
-            <ul class="posts__list">
+        <div class="collection-posts">
+            <ul class="collection-posts__list">
                 @foreach ($posts as $post)
-                    <a class="posts__username">{{ $post->user->name }}</a>
-                    <a class="posts__title" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
-                    <div class="posts__categories">
+                    <a class="collection-posts__username">{{ $post->user->name }}</a>
+                    <a class="collection-posts__title" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
+                    <div class="collection-posts__categories">
                         @foreach ($post->categories as $category)
                             <a class="category" href="/forum?category={{$category->id}}"> {{ $category->title }}</a>
                         @endforeach
                     </div>
-                    <p class="posts__creation">@date($post->created_at)</p>
-                    <hr class="posts__separator"/>
+                    <p class="collection-posts__creation">@date($post->created_at)</p>
+                    <hr class="collection-posts__separator"/>
                 @endforeach
             </ul>
             <div class="pagination">

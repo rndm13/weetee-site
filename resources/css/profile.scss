@@ -9,7 +9,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: row;
+        flex-flow: row wrap;
         gap: var(--big-gap);
     }
 
