@@ -122,10 +122,20 @@
 // All those importants are needed because select2 has stupid styles...
 
 .select2-selection {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    background: 0 !important;
+
+    border: var(--border-size) solid var(--fg-color) !important;
+    border-radius: var(--rounding) !important;
+
     &__choice {
         padding: 4px 8px !important;
         background: 0 !important;
         border: var(--border-size) solid var(--silenced-fg-color) !important;
+        border-radius: 0 !important;
 
         font-family: 'DM Sans', sans-serif;
         font-weight: 500;
@@ -143,14 +153,6 @@
             width: 8px;
         }
     }
-
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    background: 0 !important;
-
-    border: var(--border-size) solid var(--fg-color) !important;
 }
 
 .select2-dropdown {
