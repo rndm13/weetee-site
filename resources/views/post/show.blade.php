@@ -6,16 +6,21 @@
 
 <section class="post">
     <div class="container">
-        <h2 class="post__title"> {{ $post->title }}</h2>
+        <h2 class="post__title"> {{ $post->title }} </h2>
 
         <div class="post__header">
-
             <div class="post__dates">
                 <a class="post__author link" href="/profile/{{ $post->user->id }}"> By {{ $post->user->name }} </a>
                 <p class="post__date"> Created on @date($post->created_at) </p>
                 @if ($post->updated_at != $post->created_at)
                     <p class="post__date"> Edited on @date($post->updated_at) </p>
                 @endif
+            </div>
+
+            <div class="post__categories">
+                @foreach ($post->categories as $category)
+                    <a href="/forum?category={{$category->id}}" class="category">{{$category->title}}</a>
+                @endforeach
             </div>
             @auth
                 <div class="post__actions">

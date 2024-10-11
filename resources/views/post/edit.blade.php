@@ -32,6 +32,39 @@
                 </p>
             </div>
 
+            @if ($categories !== null && count($categories) !== 0)
+            <div class="form__group">
+                <label for="categories[]">Categories</label>
+
+                @php
+                foreach ($categories as $category) {
+                    $category->selected = false;
+                    foreach ($post->categories as $post_category) {
+                        if ($post_category->id == $category->id) {
+                            $category->selected = true;
+                            break;
+                        }
+                    }
+                }
+                @endphp
+
+                <select class="form__select2" name="categories[]" multiple="multiple">
+                    @foreach ($categories as $category)
+                        @if ($category->selected)
+                            <option value={{$category->id}} selected="selected">{{$category->title}}</option>
+                        @else
+                            <option value={{$category->id}}>{{$category->title}}</option>
+                        @endif
+                    @endforeach
+                </select>
+                <p class="form__error">
+                @error('categories[]')
+                    {{ $message }}
+                @enderror
+                </p>
+            </div>
+            @endif
+
             <button class="form__submit" id="login-submit">Edit</button>
         </form>
     </div>

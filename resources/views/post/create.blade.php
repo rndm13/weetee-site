@@ -32,6 +32,22 @@
                 </p>
             </div>
 
+            @if ($categories !== null && count($categories) !== 0)
+            <div class="form__group">
+                <label for="categories[]">Categories</label>
+                <select class="form__select2" name="categories[]" multiple="multiple">
+                    @foreach ($categories as $category)
+                        <option value={{$category->id}}> {{$category->title}} </option>
+                    @endforeach
+                </select>
+                <p class="form__error">
+                @error('categories[]')
+                    {{ $message }}
+                @enderror
+                </p>
+            </div>
+            @endif
+
             <button class="form__submit" id="login-submit">Publish!</button>
         </form>
     </div>

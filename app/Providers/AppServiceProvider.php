@@ -72,5 +72,7 @@ class AppServiceProvider extends ServiceProvider
                 $user->role === 'admin' ||
                 $user->role === 'moderator' && $user->role === 'user';
         });
+
+
     }
 }

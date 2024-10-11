@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    $(".form__select2").select2();
+
     $(".comment__actions .action__edit").on("click", function(e) {
         e.preventDefault();
 

@@ -68,6 +68,12 @@
         flex-direction: row;
     }
 
+    &__categories {
+        height: 100%;
+        display: flex;
+        gap: var(--gap);
+    }
+
     &__dates {
         display: flex;
         flex-direction: column;
@@ -269,5 +275,38 @@
 
     .form_edit {
         display: flex;
+    }
+}
+
+.category {
+    padding: 4px 8px;
+    max-height: 100px;
+
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: var(--gap);
+
+    color: var(--bg-color);
+    background: var(--white-color);
+    border: 0;
+
+    border-radius: var(--rounding);
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    line-height: 24px;
+    text-decoration: none;
+
+    transition: background 0.25s ease;
+
+    img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+
+    &:hover {
+        background: var(--gray-color);
     }
 }

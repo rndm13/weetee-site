@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -45,13 +48,15 @@ class PostController extends Controller
 
     public function edit_form(int $id): View
     {
-        $post = Post::find($id);
+        $post = Post::with('categories')->find($id);
 
         if ($post == null) {
             return http_response_code(404);
         }
 
-        return view('post.edit', ['post' => $post]);
+        $categories = Category::all();
+
+        return view('post.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     public function edit(int $id, Request $request): RedirectResponse
@@ -69,15 +74,24 @@ class PostController extends Controller
         $credentials = $request->validate([
             'title' => ['required'],
             'description' => ['required'],
+            'categories' => ['required'],
         ]);
-
-        if ($post == null) {
-            return to_route('index', status: 404);
-        }
 
         $post->title = $credentials['title'];
         $post->description = $request['description'];
+
         $post->save();
+
+        $cur_ids = [];
+
+        foreach ($post->categories as $cat) {
+            array_push($cur_ids, $cat->id);
+        }
+
+        [$to_attach, $to_detach] = diff_attach_detach($cur_ids, $credentials["categories"]);
+
+        $post->categories()->detach($to_detach);
+        $post->categories()->attach($to_attach);
 
         return to_route('post.show', $post->id);
     }
@@ -85,9 +99,12 @@ class PostController extends Controller
     public function create_form(): View|RedirectResponse
     {
         if (!Auth::check()) {
-            return redirect()->route('account.login');
+            return to_route('account.login');
         }
-        return view('post.create');
+
+        $categories = Category::all();
+
+        return view('post.create', ['categories' => $categories]);
     }
 
     public function create(Request $request): RedirectResponse
@@ -95,14 +112,24 @@ class PostController extends Controller
         $credentials = $request->validate([
             'title' => ['required'],
             'description' => ['required'],
+            'categories' => ['required'],
         ]);
+
+        DB::beginTransaction();
 
         $post = new Post();
 
         $post->title = $credentials['title'];
         $post->description = $credentials['description'];
         $post->user_id = Auth::id();
+
         $post->save();
+
+        foreach($credentials["categories"] as $category) {
+            $post->categories()->attach($category);
+        }
+
+        DB::commit();
 
         return to_route('post.show', $post->id);
     }
