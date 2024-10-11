@@ -72,7 +72,7 @@
     &__list {
         display: grid;
 
-        grid-template-columns: 3fr 1fr 1fr;
+        grid-template-columns: 1fr 2fr 3fr 1fr;
 
         gap: var(--gap);
 
@@ -96,6 +96,12 @@
         color: var(--fg-color);
     }
 
+    &__categories {
+        display: flex;
+        flex-flow: row wrap;
+        gap: var(--gap);
+    }
+
     &__creation {
         font-family: 'DM Sans', sans-serif;
         font-weight: 500;
@@ -104,7 +110,6 @@
 
         color: var(--silenced-fg-color);
     }
-
 
     &__username {
         font-family: 'DM Sans', sans-serif;
@@ -116,7 +121,6 @@
 
         color: var(--silenced-fg-color);
     }
-
 
     &__separator:not(:last-child) {
         content: ' ';
@@ -132,5 +136,38 @@
 
     &__separator:last-child {
         display: none;
+    }
+}
+
+.category {
+    padding: 0px 8px;
+    max-height: 100px;
+
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: var(--gap);
+
+    color: var(--bg-color);
+    background: var(--white-color);
+    border: 0;
+
+    border-radius: var(--rounding);
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    text-decoration: none;
+
+    transition: background 0.25s ease;
+
+    img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+
+    &:hover {
+        background: var(--gray-color);
     }
 }

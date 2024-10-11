@@ -32,9 +32,14 @@
         <div class="posts">
             <ul class="posts__list">
 	            @foreach ($posts as $post)
-	                <a class="posts__title" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
-	                <p class="posts__creation">@date($post->created_at)</p>
 	                <a class="posts__username">{{ $post->user->name }}</a>
+	                <a class="posts__title" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
+                    <div class="posts__categories">
+                        @foreach ($post->categories as $category)
+                            <a class="category" href="/forum?category={{$category->id}}"> {{ $category->title }}</a>
+                        @endforeach
+                    </div>
+	                <p class="posts__creation">@date($post->created_at)</p>
 	                <hr class="posts__separator"/>
 	            @endforeach
 	        </ul>
