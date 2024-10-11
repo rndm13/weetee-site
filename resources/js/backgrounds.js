@@ -105,8 +105,10 @@ $(document).ready(function() {
                 const type = i % 4;
 
                 const gap_points = base_gap_points * (type + 1);
-                for (let j = 0; j * (gap_points + gap_points) + padding_left < canvas.width; j++) {
 
+                let j = 0;
+
+                while (true) {
                     const phase_start = type * 3;
                     const speed_start = type / 100 + 0.5;
                     const max_height_start = base_height / (type + 4);
@@ -136,6 +138,12 @@ $(document).ready(function() {
                     ctx.lineTo(left_end, top + height_end);
 
                     ctx.stroke();
+
+                    if (left_end >= canvas.width + 30) {
+                        break;
+                    }
+
+                    j++;
                 }
             }
         }
