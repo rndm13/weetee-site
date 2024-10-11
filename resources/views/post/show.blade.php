@@ -36,7 +36,7 @@
             {!! nl2br(e($post->description)) !!}
         </p>
 
-        <div class="comments">
+        <div class="comments" data-edit={{ !$errors->isEmpty() ? "true" : "false" }}>
             <h3 class="comments__title"> Comments </h3>
 
             @auth

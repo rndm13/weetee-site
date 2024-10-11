@@ -4,7 +4,7 @@
 
 @section("content")
 
-<section class="profile" id="profile">
+<section class="profile" id="profile" data-edit={{ !$errors->isEmpty() ? "true" : "false" }}>
     <div class="container">
         <div class="profile__header">
             <h3 class="profile__role"> {{ucfirst($user->role)}} </h3>
