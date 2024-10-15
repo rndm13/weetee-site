@@ -1,6 +1,10 @@
 @extends("master")
 
-@section("title", "Home")
+@php
+    $title = "Post '" . $post->title . "'";
+@endphp
+
+@section("title", $title)
 
 @section("content")
 
