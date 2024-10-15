@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -63,7 +64,9 @@ class AdminDashboardController extends Controller
     }
 
     public function posts(): View {
-        return view('admin.posts');
+        $posts = Post::paginate();
+
+        return view('admin.posts', ['posts' => $posts]);
     }
 
     public function translations(): View {

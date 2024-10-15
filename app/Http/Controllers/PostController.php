@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
@@ -42,6 +43,10 @@ class PostController extends Controller
         }
 
         $deleted = Post::destroy($id);
+
+        if (url()->previous() == Url::route('admin.posts')) {
+            return back();
+        }
 
         return to_route('index');
     }
