@@ -36,3 +36,7 @@
 .collection-categories {
     @include collection(4fr 1fr);
 }
+
+.collection-users {
+    @include collection(1fr 1fr 1fr 1fr 1fr);
+}

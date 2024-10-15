@@ -189,6 +189,7 @@ class AccountController extends Controller
         $credentials = $request->validate([
             'name' => ['required', Rule::unique('users', 'name')->ignore($id)],
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($id)],
+            'role' => ['sometimes', 'in:admin,moderator,user'],
         ]);
 
         $user = User::find($id);
@@ -203,6 +204,10 @@ class AccountController extends Controller
 
         $user->name = $credentials['name'];
         $user->email = $credentials['email'];
+
+        if (array_key_exists('role', $credentials)) {
+            $user->role = $credentials['role'];
+        }
 
         $user->save();
 

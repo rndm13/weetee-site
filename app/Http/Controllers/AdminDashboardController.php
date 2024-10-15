@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -17,7 +18,9 @@ class AdminDashboardController extends Controller
     }
 
     public function users(): View {
-        return view('admin.users');
+        $users = User::paginate();
+
+        return view('admin.users', ['users' => $users]);
     }
 
     public function documentation(): View {

@@ -63,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('update-account', function (User $user, User $account) {
-            return $user->id === $account->id;
+            return $user->id === $account->id || $user->role === 'admin';
         });
 
         Gate::define('delete-account', function (User $user, User $account) {
