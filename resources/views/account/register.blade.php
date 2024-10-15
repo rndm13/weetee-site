@@ -14,7 +14,7 @@
 
             <div class="form__group">
                 <label for="name">Name</label>
-                <input type="text" name="name">
+                <input class="form__input" type="text" name="name">
                 <p class="form__error">
                 @error('name')
                     {{ $message }}
@@ -24,7 +24,7 @@
 
             <div class="form__group">
                 <label for="email">Email</label>
-                <input type="email" name="email">
+                <input class="form__input" type="email" name="email">
                 <p class="form__error">
                 @error('email')
                     {{ $message }}
@@ -34,7 +34,7 @@
 
             <div class="form__group">
                 <label for="password">Password</label>
-                <input type="password" name="password">
+                <input class="form__input" type="password" name="password">
                 <p class="form__error">
                 @error('password')
                     {{ $message }}
@@ -44,7 +44,7 @@
 
             <div class="form__group">
                 <label for="confirm_password">Confirm Password</label>
-                <input type="password" name="confirm_password">
+                <input class="form__input" type="password" name="confirm_password">
                 <p class="form__error">
                 @error('confirm_password')
                     {{ $message }}

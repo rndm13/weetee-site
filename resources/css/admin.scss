@@ -2,15 +2,16 @@
     @include menu(-100%, var(--sec-bg-color));
 
     /* Not Phone */
-    @media only screen and (min-width: 60em) {
+    @media only screen and (min-width: 40em) {
         width: fit-content;
         min-width: 300px;
     }
 
     &__button {
         margin-right: 16px;
+
         /* Phone */
-        @media only screen and (max-width: 60em) {
+        @media only screen and (max-width: 40em) {
             margin-right: auto;
         }
     }
@@ -22,6 +23,7 @@
     min-height: 100vh;
 
     &__title {
+        padding-bottom: 20px;
         font-family: 'DM Sans', sans-serif;
         font-weight: 900;
         font-size: 40px;
@@ -29,4 +31,8 @@
 
         color: var(--fg-color);
     }
+}
+
+.collection-categories {
+    @include collection(5fr 1fr);
 }

@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="form__group">
-                    <input type="text" name="search" value={{$filter['search']}}>
+                    <input class="form__input" type="text" name="search" value={{$filter['search']}}>
                     <button class="forum__search">
                         <img src={{ Vite::image("search.svg") }} alt="Search">
                     </button>

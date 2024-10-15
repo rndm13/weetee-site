@@ -31,11 +31,11 @@
                     @if (Auth::user()->can('delete-post', $post))
                     <form action="/post/delete/{{ $post->id }}" method="POST">
                         @csrf
-                        <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
+                        <button class="action--delete"> <img src={{ Vite::image("cross.svg") }} /></button>
                     </form>
                     @endif
                     @if (Auth::user()->can('update-post', $post))
-                    <a class="action__edit" href="/post/edit/{{ $post->id }}"> <img src={{ Vite::image("edit.svg") }} /> </a>
+                    <a class="action--edit" href="/post/edit/{{ $post->id }}"> <img src={{ Vite::image("edit.svg") }} /> </a>
                     @endif
                 </div>
             @endauth
@@ -58,7 +58,7 @@
 
         <div class="form__group">
             <label for="description">Description</label>
-            <textarea name="description"></textarea>
+            <textarea class="form__input" name="description"></textarea>
             <p class="form__error">
             @error('comment')
                 {{ $message }}
@@ -87,12 +87,12 @@
                             @if (Auth::user()->can('delete-comment', $comment))
                             <form action="/comment/delete/{{ $comment->id }}" method="POST">
                                 @csrf
-                                <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
+                                <button class="action--delete"> <img src={{ Vite::image("cross.svg") }} /></button>
                             </form>
                             @endif
 
                             @if (Auth::user()->can('update-comment', $comment))
-                                <button class="action__edit"> <img src={{ Vite::image("edit.svg") }} /> </button>
+                                <button class="action--edit"> <img src={{ Vite::image("edit.svg") }} /> </button>
                             @endif
                         </div>
                     @endauth
@@ -104,7 +104,7 @@
 
                     <div class="form__group">
                         <label for="description">Description</label>
-                        <textarea name="description"> {!! nl2br(e($comment->description)) !!} </textarea>
+                        <textarea class="form__input" name="description"> {!! nl2br(e($comment->description)) !!} </textarea>
                         <p class="form__error">
                         @error('comment')
                             {{ $message }}

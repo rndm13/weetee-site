@@ -20,7 +20,7 @@ $(document).ready(function() {
         }
     });
 
-    $(".comment__actions .action__edit").on("click", function(e) {
+    $(".comment__actions .action--edit").on("click", function(e) {
         e.preventDefault();
 
         let comment = $(this).closest(".comment");

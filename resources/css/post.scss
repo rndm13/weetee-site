@@ -155,15 +155,15 @@
     }
 }
 
-.action__delete {
+.action--delete {
     @include action(30px);
 }
 
-.action__edit {
+.action--edit {
     @include action(40px);
 }
 
-.action__report {
+.action--report {
     @include action(40px);
 }
 

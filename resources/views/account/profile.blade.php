@@ -16,16 +16,16 @@
                 @can('delete-account', $user)
                     <form action="/account/delete/{{ $user->id }}" method="POST">
                         @csrf
-                        <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} alt="Delete" /></button>
+                        <button class="action--delete"> <img src={{ Vite::image("cross.svg") }} alt="Delete" /></button>
                     </form>
                 @endcan
 
                 @can('update-account', $user)
-                    <button class="action__edit"> <img src={{ Vite::image("edit.svg") }} alt="Edit" /></button>
+                    <button class="action--edit"> <img src={{ Vite::image("edit.svg") }} alt="Edit" /></button>
                 @endcan
 
                 @can('report-account', $user)
-                    <a class="action__report" href="/account/report/{{$user->id}}"><img src={{ Vite::image("flag.svg") }} alt="Report"> </a>
+                    <a class="action--report" href="/account/report/{{$user->id}}"><img src={{ Vite::image("flag.svg") }} alt="Report"> </a>
                 @endcan
             </div>
             @endauth
@@ -103,7 +103,7 @@
 
             <div class="form__group">
                 <label for="name">Name</label>
-                <input name="name" value={{ $user->name }} />
+                <input class="form__input" name="name" value={{ $user->name }} />
                 <p class="form__error">
                 @error('name')
                     {{ $message }}
@@ -113,7 +113,7 @@
 
             <div class="form__group">
                 <label for="email">Email</label>
-                <input name="email" type="email" value={{ $user->email }} />
+                <input class="form__input" name="email" type="email" value={{ $user->email }} />
                 <p class="form__error">
                 @error('email')
                     {{ $message }}
@@ -129,7 +129,7 @@
 
             <div class="form__group">
                 <label for="password">Password</label>
-                <input name="password" type="password"/>
+                <input class="form__input" name="password" type="password"/>
                 <p class="form__error">
                 @error('password')
                     {{ $message }}
@@ -139,7 +139,7 @@
 
             <div class="form__group">
                 <label for="confirm_password">Confirm password</label>
-                <input name="confirm_password" type="password" />
+                <input class="form__input" name="confirm_password" type="password" />
                 <p class="form__error">
                 @error('confirm_password')
                     {{ $message }}

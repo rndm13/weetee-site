@@ -51,6 +51,10 @@ Route::middleware("can:admin-dashboard")->group(function () {
     Route::get('/admin', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
     Route::get('/admin/reports', [AdminDashboardController::class, 'reports'])->name('admin.reports');
+
+    Route::get('/admin/categories', [AdminDashboardController::class, 'categories'])->name('admin.categories');
+    Route::post('/admin/category/save', [AdminDashboardController::class, 'category_save'])->name('admin.category_save');
+
     Route::get('/admin/posts', [AdminDashboardController::class, 'posts'])->name('admin.posts');
     Route::get('/admin/documentation', [AdminDashboardController::class, 'documentation'])->name('admin.documentation');
     Route::get('/admin/translations', [AdminDashboardController::class, 'translations'])->name('admin.translations');

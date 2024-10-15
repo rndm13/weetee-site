@@ -42,6 +42,7 @@
 
                 <a href="/admin/users" class="link">Users</a>
                 <a href="/admin/reports" class="link">Reports</a>
+                <a href="/admin/categories" class="link">Categories</a>
                 <a href="/admin/posts" class="link">Posts</a>
                 <a href="/admin/documentation" class="link">Documentation</a>
                 <a href="/admin/translations" class="link">Translations</a>

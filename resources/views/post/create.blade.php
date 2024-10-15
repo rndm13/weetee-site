@@ -14,7 +14,7 @@
 
             <div class="form__group">
                 <label for="title">Title</label>
-                <input type="text" name="title">
+                <input class="form__input" type="text" name="title">
                 <p class="form__error">
                 @error('title')
                     {{ $message }}
@@ -24,7 +24,7 @@
 
             <div class="form__group">
                 <label for="description">Description</label>
-                <textarea type="text" name="description"></textarea>
+                <textarea class="form__input" type="text" name="description"></textarea>
                 <p class="form__error">
                 @error('description')
                     {{ $message }}

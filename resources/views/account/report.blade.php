@@ -14,7 +14,7 @@
 
             <div class="form__group">
                 <label for="reason">Reason</label>
-                <textarea name="reason"></textarea>
+                <textarea class="form__input" name="reason"></textarea>
                 <p class="form__error">
                 @error('reason')
                     {{ $message }}

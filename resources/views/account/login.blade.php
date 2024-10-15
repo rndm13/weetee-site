@@ -14,7 +14,7 @@
 
             <div class="form__group">
                 <label for="email">Email</label>
-                <input type="email" name="email">
+                <input class="form__input" type="email" name="email">
                 <p class="form__error">
                 @error('email')
                     {{ $message }}
@@ -24,7 +24,7 @@
 
             <div class="form__group">
                 <label for="password">Password</label>
-                <input type="password" name="password">
+                <input class="form__input" type="password" name="password">
                 <p class="form__error">
                 @error('email')
                     {{ $message }}

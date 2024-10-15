@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(".profile__actions .action__edit").on("click", function(e) {
+    $(".profile__actions .action--edit").on("click", function(e) {
         e.preventDefault();
 
         let comment = $(this).closest(".profile");
