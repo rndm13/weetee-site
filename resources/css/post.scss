@@ -134,46 +134,37 @@
     }
 }
 
-.action__delete {
+@mixin action($size) {
     background: 0;
     border: 0;
     box-sizing: border-box;
 
-    img {
-        object-fit: contain;
-        width: 30px;
-        height: 30px;
-    }
-
     opacity: 80%;
     transform: scale(80%);
     transition: all 0.5s ease;
+
+    img {
+        object-fit: contain;
+        width: $size;
+        height: $size;
+    }
+
+    &:hover {
+        opacity: 100%;
+        transform: scale(100%);
+    }
 }
 
-.action__delete:hover {
-    opacity: 100%;
-    transform: scale(100%);
+.action__delete {
+    @include action(30px);
 }
 
 .action__edit {
-    background: 0;
-    border: 0;
-    box-sizing: border-box;
-
-    img {
-        object-fit: contain;
-        width: 40px;
-        height: 40px;
-    }
-
-    opacity: 80%;
-    transform: scale(80%);
-    transition: all 0.5s ease;
+    @include action(40px);
 }
 
-.action__edit:hover {
-    opacity: 100%;
-    transform: scale(100%);
+.action__report {
+    @include action(40px);
 }
 
 .form.comment-form {

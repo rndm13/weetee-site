@@ -186,3 +186,45 @@
 .form_edit {
     @extend .form;
 }
+
+.form__pills {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: var(--gap);
+}
+
+.form__pill {
+    padding: 8px 12px;
+    box-sizing: border-box;
+
+    border: 0;
+    background: var(--silenced-fg-color);
+    border-radius: var(--rounding);
+
+    color: var(--bg-color);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    text-decoration: none;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    transition: all 0.3s ease;
+
+    input {
+        appearance: none;
+        display: none;
+    }
+
+    &:has(> input[checked]) {
+        background: var(--primary-color);
+        color: var(--fg-color);
+    }
+
+    &:hover {
+        background: var(--fg-color);
+    }
+}

@@ -13,16 +13,20 @@
 
             @auth
             <div class="profile__actions">
-                @if (Auth::user()->can('delete-account', $user))
+                @can('delete-account', $user)
                     <form action="/account/delete/{{ $user->id }}" method="POST">
                         @csrf
-                        <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} /></button>
+                        <button class="action__delete"> <img src={{ Vite::image("cross.svg") }} alt="Delete" /></button>
                     </form>
-                @endif
+                @endcan
 
-                @if (Auth::user()->can('update-account', $user))
-                    <button class="action__edit"> <img src={{ Vite::image("edit.svg") }} /></button>
-                @endif
+                @can('update-account', $user)
+                    <button class="action__edit"> <img src={{ Vite::image("edit.svg") }} alt="Edit" /></button>
+                @endcan
+
+                @can('report-account', $user)
+                    <a class="action__report" href="/account/report/{{$user->id}}"><img src={{ Vite::image("flag.svg") }} alt="Report"> </a>
+                @endcan
             </div>
             @endauth
         </div>

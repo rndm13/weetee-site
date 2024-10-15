@@ -111,6 +111,131 @@ body {
     z-index: -100;
 }
 
+.form {
+    @extend .container;
+    max-width: 720px;
+
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+
+    &::after {
+        content: '';
+        left: 0;
+        top: 0;
+        position: absolute;
+        z-index: -1;
+
+        width: 100%;
+        height: 100%;
+
+        border-radius: var(--rounding);
+
+        background: var(--sec-bg-color);
+        opacity: 80%;
+    }
+
+    &__title {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 36px;
+        color: var(--fg-color);
+        padding-bottom: var(--big-gap);
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--big-gap);
+    }
+
+    &__group {
+        width: 100%;
+
+        display: flex;
+        flex-flow: column;
+        justify-items: center;
+        align-items: left;
+
+        gap: var(--gap);
+    }
+
+    &__group > label {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        color: var(--fg-color);
+    }
+
+    &__group > input,textarea {
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        box-sizing: border-box;
+
+        padding: 8px 4px;
+
+        background: 0;
+        border-radius: var(--rounding);
+        border: var(--border-size) solid var(--fg-color);
+
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 16px;
+
+        color: var(--fg-color);
+    }
+
+    &__error {
+        width: 100%;
+        min-height: 24px;
+
+        color: var(--silenced-fg-color);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    &__submit {
+        padding: 8px 12px;
+        max-height: 100px;
+
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        gap: var(--gap);
+
+        color: var(--fg-color);
+        background: var(--primary-color);
+        border: 0;
+
+        border-radius: var(--rounding);
+
+        font-family: 'DM Sans', sans-serif;
+        font-size: 20px;
+        line-height: 24px;
+
+        transition: background 0.25s ease;
+    }
+
+    &__submit:hover {
+        background: var(--secondary-color);
+    }
+
+    &__submit--sending {
+        background: var(--secondary-color);
+        color: var(--silenced-fg-color);
+    }
+}
+
+.form_edit {
+    @extend .form;
+}
+
 .pagination {
     margin-top: 8px;
 

@@ -8,6 +8,7 @@ import "../lib/select2/js/select2.min.js";
 import "./header";
 import "./site";
 import "./backgrounds";
+import "./form";
 
 import "./login";
 import "./post";

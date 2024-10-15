@@ -48,7 +48,7 @@
             </div>
             @endif
 
-            <button class="form__submit" id="login-submit">Publish!</button>
+            <button class="form__submit" id="post-create-submit">Publish!</button>
         </form>
     </div>
 </section>

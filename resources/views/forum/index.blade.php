@@ -7,7 +7,33 @@
 <section class="forum" id="forum">
     <canvas class="sine-background"> </canvas>
     <div class="container">
-        <h2 class="forum__title">Forum</h2>
+        <div class="forum__title">
+            <h2>Forum</h2>
+        </div>
+        <div class="forum__header">
+
+            <form action="/forum" class="forum__form">
+                <div class="form__pills">
+                    <label class="form__pill" for="category_0">
+                        <input type="radio" class="pill" name="category" id="category_0" value="0" @checked($filter['category'] === 0)>
+                        Any
+                    </label>
+                    @foreach ($categories as $category)
+                    <label class="form__pill" for="category_{{$category->id}}">
+                        <input type="radio" class="pill" name="category" id="category_{{$category->id}}" value="{{$category->id}}" @checked($filter['category'] === $category->id)>
+                        {{$category->title}}
+                    </label>
+                    @endforeach
+                </div>
+
+                <div class="form__group">
+                    <input type="text" name="search" value={{$filter['search']}}>
+                    <button class="forum__search">
+                        <img src={{ Vite::image("search.svg") }} alt="Search">
+                    </button>
+                </div>
+            </form>
+        </div>
 
         <div class="forum__create">
             <p>Have a question or would like to request a feature?</p>
@@ -17,7 +43,7 @@
         <div class="collection-posts">
             <ul class="collection-posts__list">
                 @foreach ($posts as $post)
-                    <a class="collection-posts__username">{{ $post->user->name }}</a>
+                    <a class="collection-posts__username link" href="profile/{{$post->user->id}}">{{ $post->user->name }}</a>
                     <a class="collection-posts__title" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
                     <div class="collection-posts__categories">
                         @foreach ($post->categories as $category)

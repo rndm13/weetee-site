@@ -65,7 +65,7 @@
             </div>
             @endif
 
-            <button class="form__submit" id="login-submit">Edit</button>
+            <button class="form__submit" id="post-edit-submit">Edit</button>
         </form>
     </div>
 </section>

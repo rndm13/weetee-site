@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', [HomeController::class, 'show'])->name('index');
 Route::get('/post/create', [PostController::class, 'create_form'])->name('post.create_form');
@@ -42,3 +43,5 @@ Route::post('/comment/create/{post_id}', [CommentController::class, 'create'])->
 Route::post('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
 Route::post('/comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
 
+Route::get('/account/report/{id}', [ReportController::class, 'create_form'])->name('account.report_form');
+Route::post('/account/report/{id}', [ReportController::class, 'create'])->name('account.report');

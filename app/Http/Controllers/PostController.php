@@ -82,16 +82,7 @@ class PostController extends Controller
 
         $post->save();
 
-        $cur_ids = [];
-
-        foreach ($post->categories as $cat) {
-            array_push($cur_ids, $cat->id);
-        }
-
-        [$to_attach, $to_detach] = diff_attach_detach($cur_ids, $credentials["categories"]);
-
-        $post->categories()->detach($to_detach);
-        $post->categories()->attach($to_attach);
+        $post->categories()->sync($credentials['categories']);
 
         return to_route('post.show', $post->id);
     }
