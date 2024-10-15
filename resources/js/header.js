@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(".menu-button").click(function(e) {
+    $(".menu__button").click(function(e) {
         let clicked_str = $(this).attr('data-clicked');
         let clicked = clicked_str == "true";
 
