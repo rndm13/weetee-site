@@ -80,5 +80,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('report-post', function (User $user, Post $post) {
             return $user->id !== $post->user->id;
         });
+
+        Gate::define('admin-dashboard', function (User $user) {
+            return $user->role === 'admin';
+        });
     }
 }

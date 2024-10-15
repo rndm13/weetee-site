@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield("title") - Weetee</title>
+    <title>@yield("title") - Weetee Admin</title>
 
     @vite(['resources/css/app.scss'])
     @vite(['resources/js/app.js'])
@@ -12,56 +12,39 @@
     <header class="header">
         <div class="container">
             <nav class="header__nav">
-                <a href="/" class="logo"><h1>Weetee</h1></a>
-                <a href="/" class="link">Home</a>
-                <a href="/#about" class="link">About</a>
-                <a href="/#faq" class="link">FAQ</a>
-                <a href="/documentation" class="link">Documentation</a>
-                <a href="/forum" class="link">Forum</a>
-                @can('admin-dashboard')
-                    <a href="/admin" class="link">Admin</a>
-                @endcan
-
-                <div class="auth-nav">
-                    @if (!Auth::check())
-                        <a href="/login" class="link">Login</a>
-                        <a href="/register" class="link">Register</a>
-                    @else
-                        <div class="user">
-                            <a class="user__name link" href="/profile/{{ Auth::id() }}">{{ Auth::user()->name }}</a>
-                            <a href="/logout" class="link">Logout</a>
-                        </div>
-                    @endif
-                </div>
-
-                <button class="menu__button" data-menu-id="menu">
+                <button class="menu-side__button menu-button" data-menu-id="menu-side">
                     <img src={{ Vite::asset('resources/imgs/menu.svg') }} alt="Menu">
                 </button>
+
+                <a href="/" class="logo"><h1>Weetee</h1></a>
+
+                <div class="auth-nav">
+                    <div class="user">
+                        <a class="user__name link" href="/profile/{{ Auth::id() }}">{{ Auth::user()->name }}</a>
+                        <a href="/logout" class="link">Logout</a>
+                    </div>
+                </div>
             </nav>
         </div>
 
-        <div class="menu" id="menu">
+        <div class="menu-side" id="menu-side">
             <div class="container">
                 @if (!Auth::check())
                     <a href="/login" class="link">Login</a>
                     <a href="/register" class="link">Register</a>
                 @else
                     <div class="user">
-                        @can('admin-dashboard')
-                            <a href="/admin" class="link">Admin Dashboard</a>
-                        @endcan
-
                         <a class="user__name link" href="/profile/{{ Auth::id() }}">{{ Auth::user()->name }}</a>
                         <a href="/logout" class="link">Logout</a>
                     </div>
                     <hr class="menu__separator"/>
                 @endif
 
-                <a href="/" class="link">Home</a>
-                <a href="/#about" class="link">About</a>
-                <a href="/#faq" class="link">FAQ</a>
-                <a href="/documentation" class="link">Documentation</a>
-                <a href="/forum" class="link">Forum</a>
+                <a href="/admin/users" class="link">Users</a>
+                <a href="/admin/reports" class="link">Reports</a>
+                <a href="/admin/posts" class="link">Posts</a>
+                <a href="/admin/documentation" class="link">Documentation</a>
+                <a href="/admin/translations" class="link">Translations</a>
             </div>
         </div>
     </header>

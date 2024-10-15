@@ -12,5 +12,5 @@ Artisan::command('new-command', function () {
 })->purpose('Future command');
 
 Schedule::call(function () {
-    DB::table('users')->where('created_date', '<=', Carbon::now()->subDays(2)->toDateTimeString())->whereAnd('email_verified_at', null)->get();
+    DB::table('users')->where('created_date', '<=', Carbon::now()->subDays(2)->toDateTimeString())->whereAnd('email_verified_at', null)->delete();
 })->daily();

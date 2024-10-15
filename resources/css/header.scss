@@ -32,6 +32,13 @@
         .link {
             height: fit-content;
         }
+
+        /* Phone */
+        @media only screen and (max-width: 60em) {
+            .link,.auth-nav {
+                display: none;
+            }
+        }
     }
 
     .logo {
@@ -47,74 +54,23 @@
     gap: var(--gap);
 }
 
-.menu {
-    display: none;
-
-    &__button {
-        display: none;
-    }
-}
-
-/* Phone */
-@media only screen and (max-width: 50em) {
-    .header__nav > .link,.auth-nav {
-        display: none;
-    }
-
-    .menu {
-        display: initial;
-
-        &__button {
-            margin-left: auto;
-            display: block;
-        }
-    }
-
-    .menu__button > img {
-        height: 40px;
-        width: 40px;
-
-        object-fit: cover;
-    }
-
-    .menu__button {
-
-        background: 0;
-        color: var(--fg-color);
-
-        font-size: 14px;
-
-        border: none;
-        border-radius: var(--rounding);
-    }
-
-    .menu__hidden > .container >  .link {
-        font-size: 28px;
-        line-height: 32px;
-    }
-}
-
-.menu__hidden {
+@mixin menu($left, $bg-color: var(--bg-color)) {
     position: absolute;
 
     top: var(--header-height);
-    left: 100%;
+    left: $left;
 
     width: 100vw;
     height: 100vh;
+    box-sizing: border-box;
 
     z-index: 200;
 
-    background: var(--bg-color);
+    background: $bg-color;
 
     transition: left 0.5s ease;
 
-    .user > * {
-        font-size: 28px;
-        line-height: 32px;
-    }
-
-    .menu__separator {
+    &__separator {
         content: ' ';
         width: 100%;
         border-top: var(--border-size) solid var(--silenced-fg-color);
@@ -124,10 +80,56 @@
         padding-top: 12px;
         align-items: start;
     }
+
+    &__button {
+        display: block;
+
+        background: 0;
+        color: var(--fg-color);
+
+        font-size: 14px;
+
+        border: none;
+        border-radius: var(--rounding);
+
+        img {
+            height: 40px;
+            width: 40px;
+
+            object-fit: cover;
+        }
+    }
+
+    &[data-open=true] {
+        left: 0;
+    }
+
+    .user > * {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .container >  .link {
+        font-size: 28px;
+        line-height: 32px;
+    }
 }
 
-.menu[data-open=true] > .menu__hidden {
-    left: 0;
+.menu {
+    @include menu(100vw);
+
+    /* Not phone */
+    @media only screen and (min-width: 60em) {
+        display: none;
+
+        &__button {
+            display: none !important;
+        }
+    }
+
+    &__button {
+        margin-left: auto;
+    }
 }
 
 body[data-menu-open=true] {
@@ -145,9 +147,5 @@ body[data-menu-open=true] {
         font-family: 'DM Sans', sans-serif;
         font-size: 20px;
         line-height: 20px;
-    }
-
-    .link {
-
     }
 }

@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ReportController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'show'])->name('index');
 Route::get('/post/create', [PostController::class, 'create_form'])->name('post.create_form');
@@ -45,3 +46,12 @@ Route::post('/comment/delete/{id}', [CommentController::class, 'delete'])->name(
 
 Route::get('/account/report/{id}', [ReportController::class, 'create_form'])->name('account.report_form');
 Route::post('/account/report/{id}', [ReportController::class, 'create'])->name('account.report');
+
+Route::middleware("can:admin-dashboard")->group(function () {
+    Route::get('/admin', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
+    Route::get('/admin/reports', [AdminDashboardController::class, 'reports'])->name('admin.reports');
+    Route::get('/admin/posts', [AdminDashboardController::class, 'posts'])->name('admin.posts');
+    Route::get('/admin/documentation', [AdminDashboardController::class, 'documentation'])->name('admin.documentation');
+    Route::get('/admin/translations', [AdminDashboardController::class, 'translations'])->name('admin.translations');
+});
