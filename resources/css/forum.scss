@@ -3,7 +3,7 @@
 
     padding-top: 120px;
     box-sizing: border-box;
-    height: 100vh;
+    min-height: 100vh;
 
     .container {
         position: relative;
@@ -169,6 +169,8 @@
     }
 
     &__categories {
+        width: 100%;
+
         display: flex;
         flex-flow: row wrap;
         gap: var(--gap);
