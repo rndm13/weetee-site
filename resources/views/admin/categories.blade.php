@@ -23,19 +23,42 @@
 
                     <button class="form__submit">Add</button>
                 </form>
-                <hr class="collection-categories__separator"/>
+
                 <hr class="collection-categories__separator"/>
 
 	            @foreach ($categories as $category)
-	                <p class="collection-categories__title">{{ $category->title }}</a>
-                    <div class="collection-categories__actions">
-                        <form action="/admin/category/delete/{{ $category->id }}" method="POST">
-                            @csrf
-                            <button class="action--delete"> <img src={{ Vite::image("cross.svg") }} /></button>
-                        </form>
+                    <div class="collection__list-item collection-categories__list-item">
+                        <p class="collection-categories__field">{{ $category->title }}</a>
+	                    <div class="collection__actions collection-categories__actions">
+	                        <form action="/admin/category/delete/{{ $category->id }}" method="POST">
+	                            @csrf
+	                            <button class="action--delete"> <img src={{ Vite::image("cross.svg") }} /></button>
+	                        </form>
 
-                        <button class="action--edit"> <img src={{ Vite::image("edit.svg") }} /> </button>
+	                        <button class="action--edit"> <img src={{ Vite::image("edit.svg") }} /> </button>
+	                    </div>
                     </div>
+
+                    <form action="/admin/category/save/" method="POST" class="collection__form--edit collection-categories__form--edit">
+                        @csrf
+
+                        <input type="number" class="form__input--hidden" name="id" value="{{ $category->id }}">
+
+                        <div class="form__group">
+                            <input class="form__input" type="text" name="title" value="{{ $category->title }}">
+                            <p class="form__error--hide">
+                            @error('title')
+                                {{ $message }}
+                            @enderror
+                            </p>
+                        </div>
+
+                        <div class="collection__actions collection-categories__actions">
+                            <button class="form__submit">Save</button>
+	                        <button type="button" class="action--edit"> <img src={{ Vite::image("edit.svg") }} /> </button>
+                        </div>
+                    </form>
+
 	                <hr class="collection-categories__separator"/>
 	            @endforeach
 	        </ul>

@@ -11,7 +11,6 @@
             <h2>Forum</h2>
         </div>
         <div class="forum__header">
-
             <form action="/forum" class="forum__form">
                 <div class="form__pills">
                     <label class="form__pill" for="category_0">
@@ -43,14 +42,16 @@
         <div class="collection-posts">
             <ul class="collection-posts__list">
                 @foreach ($posts as $post)
-                    <a class="collection-posts__username link" href="profile/{{$post->user->id}}">{{ $post->user->name }}</a>
-                    <a class="collection-posts__title" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
-                    <div class="collection-posts__categories">
-                        @foreach ($post->categories as $category)
-                            <a class="category" href="/forum?category={{$category->id}}"> {{ $category->title }}</a>
-                        @endforeach
+                    <div class="collection-posts__list-item">
+                        <a class="collection-posts__field link" href="profile/{{$post->user->id}}">{{ $post->user->name }}</a>
+	                    <a class="collection-posts__field link" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
+	                    <div class="collection-posts__field-pills">
+	                        @foreach ($post->categories as $category)
+	                            <a class="category" href="/forum?category={{$category->id}}"> {{ $category->title }}</a>
+	                        @endforeach
+	                    </div>
+	                    <p class="collection-posts__field--secondary">@date($post->created_at)</p>
                     </div>
-                    <p class="collection-posts__creation">@date($post->created_at)</p>
                     <hr class="collection-posts__separator"/>
                 @endforeach
             </ul>

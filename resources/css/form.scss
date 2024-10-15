@@ -40,14 +40,13 @@
     }
 
     &__group {
+        padding: 4px 0;
         width: 100%;
 
         display: flex;
         flex-flow: column;
         justify-items: center;
         align-items: left;
-
-        gap: var(--gap);
     }
 
     &__group > label {
@@ -56,6 +55,7 @@
         font-size: 20px;
         line-height: 24px;
         color: var(--fg-color);
+        margin-bottom: var(--gap);
     }
 
     &__input {
@@ -76,6 +76,10 @@
         line-height: 16px;
 
         color: var(--fg-color);
+
+        &--hidden {
+            display: none;
+        }
     }
 
     &__error {
@@ -89,6 +93,7 @@
 
         &--hide {
             min-height: 0px;
+            box-sizing: content-box;
 
             color: var(--silenced-fg-color);
             font-family: 'DM Sans', sans-serif;

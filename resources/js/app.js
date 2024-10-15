@@ -9,6 +9,7 @@ import "./header";
 import "./site";
 import "./backgrounds";
 import "./form";
+import "./collections";
 
 import "./login";
 import "./post";

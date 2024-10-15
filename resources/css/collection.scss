@@ -5,21 +5,24 @@
 
     &__list {
         display: grid;
-
-        grid-template-columns: $template_columns;
-
         gap: var(--gap);
 
-        padding: 8px;
+        padding: var(--gap);
 
         border: var(--border-size) solid var(--silenced-fg-color);
         // border-radius: var(--rounding);
+    }
+
+    &__list-item {
+        display: grid;
+        grid-template-columns: $template_columns;
+        gap: var(--gap);
 
         align-items: center;
         justify-items: center;
     }
 
-    &__title {
+    &__field {
         font-family: 'DM Sans', sans-serif;
         font-weight: 500;
         font-size: 16px;
@@ -30,15 +33,7 @@
         color: var(--fg-color);
     }
 
-    &__categories {
-        width: 100%;
-
-        display: flex;
-        flex-flow: row wrap;
-        gap: var(--gap);
-    }
-
-    &__creation {
+    &__field--secondary {
         font-family: 'DM Sans', sans-serif;
         font-weight: 500;
         font-size: 16px;
@@ -47,15 +42,12 @@
         color: var(--silenced-fg-color);
     }
 
-    &__username {
-        font-family: 'DM Sans', sans-serif;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 24px;
+    &__field-pills {
+        width: 100%;
 
-        text-decoration: none;
-
-        color: var(--silenced-fg-color);
+        display: flex;
+        flex-flow: row wrap;
+        gap: var(--gap);
     }
 
     &__actions {
@@ -66,7 +58,7 @@
         align-items: center;
     }
 
-    &__form  {
+    &__form, &__form--edit {
         width: 100%;
 
         display: grid;
@@ -78,6 +70,18 @@
 
         align-items: center;
         justify-items: center;
+    }
+
+    &__form--edit {
+        display: none;
+    }
+
+    &__list-item[data-edit=true] + &__form--edit {
+        display: grid;
+    }
+
+    &__list-item[data-edit=true] {
+        display: none;
     }
 
     &__separator:not(:last-child) {
