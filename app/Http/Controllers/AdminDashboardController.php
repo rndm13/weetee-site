@@ -39,11 +39,7 @@ class AdminDashboardController extends Controller
             "title" => ["required"],
         ]);
 
-        Log::debug($inputs);
-
         $category = new Category();
-
-        Log::debug($inputs);
 
         if (array_key_exists("id", $inputs)) {
             $category = Category::find($inputs["id"]);
@@ -57,7 +53,11 @@ class AdminDashboardController extends Controller
 
         $category->save();
 
-        Log::debug($category);
+        return to_route('admin.categories');
+    }
+
+    public function category_delete(int $id, Request $request): RedirectResponse {
+        Category::destroy($id);
 
         return to_route('admin.categories');
     }

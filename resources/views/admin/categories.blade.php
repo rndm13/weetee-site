@@ -29,7 +29,7 @@
 	            @foreach ($categories as $category)
 	                <p class="collection-categories__title">{{ $category->title }}</a>
                     <div class="collection-categories__actions">
-                        <form action="/admin/categories/delete/{{ $category->id }}" method="POST">
+                        <form action="/admin/category/delete/{{ $category->id }}" method="POST">
                             @csrf
                             <button class="action--delete"> <img src={{ Vite::image("cross.svg") }} /></button>
                         </form>
