@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(".menu__button").click(function(e) {
+    $(".menu-button").click(function(e) {
         let clicked_str = $(this).attr('data-clicked');
         let clicked = clicked_str == "true";
 
@@ -10,10 +10,13 @@ $(document).ready(function() {
         let to_open = $(this).attr("data-menu-id");
 
         if (to_open == null) {
-            console.warn("data-menu-id not set on .menu__button");
+            console.warn("data-menu-id not set on .menu-button");
         } else {
+            if ($(`#${to_open}`).hasClass('menu')) {
+                $("body").attr('data-menu-open', clicked);
+            }
+
             $(`#${to_open}`).attr('data-open', clicked);
-            $("body").attr('data-menu-open', clicked);
         }
     });
 });

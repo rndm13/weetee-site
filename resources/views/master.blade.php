@@ -34,7 +34,7 @@
                     @endif
                 </div>
 
-                <button class="menu__button" data-menu-id="menu">
+                <button class="menu__button menu-button" data-menu-id="menu">
                     <img src={{ Vite::asset('resources/imgs/menu.svg') }} alt="Menu">
                 </button>
             </nav>
