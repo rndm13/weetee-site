@@ -13,6 +13,7 @@ class UserReport extends Model
     protected $fillable = [
         "from_user_id",
         "on_user_id",
+        "reason",
     ];
 
     public function from_user(): BelongsTo

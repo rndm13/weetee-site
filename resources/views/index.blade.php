@@ -4,6 +4,7 @@
 
 @section("content")
 <section class="home" id="home">
+
 	<canvas class="line-background"></canvas>
     <div class="container">
 	    <h2 class="home__title">Start testing APIs freely with Weetee</h1>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserReport;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -28,7 +29,9 @@ class AdminDashboardController extends Controller
     }
 
     public function reports(): View {
-        return view('admin.reports');
+        $reports = UserReport::paginate();
+
+        return view('admin.reports', ['reports' => $reports]);
     }
 
     public function categories(): View {
