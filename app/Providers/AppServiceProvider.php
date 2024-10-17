@@ -73,6 +73,12 @@ class AppServiceProvider extends ServiceProvider
                 $user->role === 'moderator' && $user->role === 'user';
         });
 
+        Gate::define('ban-account', function (User $user, User $account) {
+            return
+                $user->role === 'admin' ||
+                $user->role === 'moderator' && $account->role === 'user';
+        });
+
         Gate::define('report-account', function (User $user, User $account) {
             return $user->id !== $account->id;
         });

@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserReportReply;
 
 class AdminDashboardController extends Controller
 {
@@ -32,6 +34,47 @@ class AdminDashboardController extends Controller
         $reports = UserReport::paginate();
 
         return view('admin.reports', ['reports' => $reports]);
+    }
+
+    public function report_details(int $id): View {
+        $report = UserReport::find($id);
+
+        if ($report === null) {
+            abort(404);
+        }
+
+        return view('admin.report_details', ['report' => $report]);
+    }
+
+    public function report_resolve(int $id): RedirectResponse {
+        $report = UserReport::find($id);
+
+        if ($report === null) {
+            abort(404);
+        }
+
+        $report->status = 'resolved';
+        $report->save();
+
+        return back();
+    }
+
+    public function report_reply(int $id, Request $request): RedirectResponse {
+        $inputs = $request->validate([
+            'reply' => ['required']
+        ]);
+
+        $report = UserReport::with('from_user')->find($id);
+
+        if ($report === null) {
+            abort(404);
+        }
+
+        $to = $report->from_user->email;
+
+        Mail::to($to)->send(new UserReportReply($report, $inputs['reply']));
+
+        return back();
     }
 
     public function categories(): View {

@@ -14,14 +14,15 @@
                         <a class="collection-reports__field link" href="/profile/{{$report->on_user->id}}"> On user {{ $report->on_user->name }} </a>
 	                    <a class="collection-reports__field link" href="/profile/{{$report->from_user->id}}"> From user {{ $report->from_user->name }} </a>
                         <p class="collection-reports__field"> {{ $report->reason }}</p>
-                        <p class="collection-reports__field"> {{ $report->created_at }} </p>
+                        <p class="collection-reports__field"> {{ $report->status }} </p>
+                        <p class="collection-reports__field--secondary"> {{ $report->created_at }} </p>
                         <div class="collection-reports__actions">
                             <form action="/report/delete/{{ $report->id }}" method="report">
                                 @csrf
                                 <button class="action--delete"> <img src={{ Vite::image("cross.svg") }} alt="Delete"></button>
                             </form>
 
-                            <a href="/report/details/{{$report->id}}" class="action--details"><img src={{ Vite::image("details.svg")}} alt="Details"></a>
+                            <a href="/admin/report/details/{{$report->id}}" class="action--details"><img src={{ Vite::image("details.svg")}} alt="Details"></a>
                         </div>
                     </div>
                     <hr class="collection-reports__separator"/>

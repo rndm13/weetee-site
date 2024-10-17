@@ -39,6 +39,7 @@ Route::get('/profile/{id}', [AccountController::class, 'profile'])->name('accoun
 Route::post('/account/edit/{id}', [AccountController::class, 'edit_account'])->name('account.edit');
 Route::post('/account/edit-password/{id}', [AccountController::class, 'change_password_account'])->name('account.change_password');
 Route::post('/account/delete/{id}', [AccountController::class, 'delete_account'])->name('account.delete');
+Route::post('/account/ban/{id}', [AccountController::class, 'ban_account'])->name('account.ban');
 
 Route::post('/comment/create/{post_id}', [CommentController::class, 'create'])->name('comment.create');
 Route::post('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
@@ -51,6 +52,9 @@ Route::middleware("can:admin-dashboard")->group(function () {
     Route::get('/admin', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
     Route::get('/admin/reports', [AdminDashboardController::class, 'reports'])->name('admin.reports');
+    Route::get('/admin/report/details/{id}', [AdminDashboardController::class, 'report_details'])->name('admin.report_details');
+    Route::post('/admin/report/resolve/{id}', [AdminDashboardController::class, 'report_resolve'])->name('admin.report_resolve');
+    Route::post('/admin/report/reply/{id}', [AdminDashboardController::class, 'report_reply'])->name('admin.report_reply');
 
     Route::get('/admin/categories', [AdminDashboardController::class, 'categories'])->name('admin.categories');
     Route::post('/admin/category/save', [AdminDashboardController::class, 'category_save'])->name('admin.category_save');

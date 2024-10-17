@@ -21,6 +21,7 @@ use App\Mail\AccountConfirmation;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class AccountController extends Controller
 {
@@ -35,6 +36,14 @@ class AccountController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
+        $user = User::find('email', $credentials['email']);
+
+        if ($user !== null && $user->trashed()) {
+            return back()->withErrors([
+                'email' => 'This user has been banned from this site.',
+            ])->onlyInput('email');
+        }
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -57,14 +66,26 @@ class AccountController extends Controller
         $googleUser = Socialite::driver('google')->stateless()->user();
         $user = User::where('email', $googleUser->getEmail())->whereOr('google_id', $googleUser->getId())->first();
 
+        if ($user !== null && $user->trashed()) {
+            return to_route('account.login_form')->withErrors([
+                'email' => 'This user has been banned from this site.',
+            ])->onlyInput('email');
+        }
+
         if ($user === null) {
             $user = new User();
+
             $user->google_id = $googleUser->getId();
             $user->email_verified_at = Carbon::now();
             $user->email = $googleUser->getEmail();
             $user->name = $googleUser->getName();
             $user->google_token = $googleUser->token;
-            $user->google_refresh_token = $googleUser->refreshToken;
+
+            if ($googleUser->refreshToken !== null) {
+                $user->google_refresh_token = $googleUser->refreshToken;
+            }
+
+            $user->save();
         }
 
         Auth::login($user);
@@ -230,8 +251,27 @@ class AccountController extends Controller
             Auth::logout();
         }
 
-        User::destroy($id);
+        $user->forceDelete();
 
         return to_route('index');
+    }
+
+    public function ban_account($id): RedirectResponse
+    {
+        $user = User::find($id);
+
+        if ($user === null) {
+            return abort(404);
+        }
+
+        if (!Gate::allows('ban-account', $user)) {
+            return abort(403);
+        }
+
+        // TODO: logout the banned user by deleting his session...
+
+        $user->softDelete();
+
+        return back();
     }
 }
