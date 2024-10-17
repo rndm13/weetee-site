@@ -11,7 +11,7 @@
             <ul class="collection-users__list">
                 @foreach ($users as $user)
                     <div class="collection__list-item collection-users__list-item">
-	                    <a class="collection-users__field link" href="/user/view/{{$user->id}}">{{ $user->name }}</a>
+	                    <a class="collection-users__field link" href="/profile/{{$user->id}}">{{ $user->name }}</a>
 	                    <p class="collection-users__field">{{ ucfirst($user->role) }}</p>
 	                    <p class="collection-users__field">{{ $user->email }}</p>
                         <p class="collection-users__field--secondary">@date($user->created_at)</p>
