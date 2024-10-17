@@ -37,7 +37,7 @@ class AccountController extends Controller
             'password' => ['required'],
         ]);
 
-        $user = User::find('email', $credentials['email']);
+        $user = User::where('email', $credentials['email'])->first();
 
         // if ($user !== null && $user->trashed()) {
         //     return back()->withErrors([
