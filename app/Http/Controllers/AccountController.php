@@ -269,8 +269,9 @@ class AccountController extends Controller
         }
 
         // TODO: logout the banned user by deleting his session...
+        // TODO: make soft delete work in banning the user
 
-        $user->softDelete();
+        $user->delete();
 
         return back();
     }
