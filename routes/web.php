@@ -52,9 +52,9 @@ Route::middleware("can:admin-dashboard")->group(function () {
     Route::get('/admin', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
     Route::get('/admin/reports', [AdminDashboardController::class, 'reports'])->name('admin.reports');
-    Route::get('/admin/report/details/{id}', [AdminDashboardController::class, 'report_details'])->name('admin.report_details');
-    Route::post('/admin/report/resolve/{id}', [AdminDashboardController::class, 'report_resolve'])->name('admin.report_resolve');
-    Route::post('/admin/report/reply/{id}', [AdminDashboardController::class, 'report_reply'])->name('admin.report_reply');
+    Route::get('/admin/report/details/{id}', [ReportController::class, 'details'])->name('admin.report_details');
+    Route::post('/admin/report/resolve/{id}', [ReportController::class, 'resolve'])->name('admin.report_resolve');
+    Route::post('/admin/report/reply/{id}', [ReportController::class, 'reply'])->name('admin.report_reply');
 
     Route::get('/admin/categories', [AdminDashboardController::class, 'categories'])->name('admin.categories');
     Route::post('/admin/category/save', [AdminDashboardController::class, 'category_save'])->name('admin.category_save');

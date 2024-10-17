@@ -8,7 +8,9 @@ use App\Models\User;
 use App\Models\UserReport;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
+use App\Mail\UserReportReply;
 
 class ReportController extends Controller
 {
@@ -51,5 +53,46 @@ class ReportController extends Controller
         $report->save();
 
         return to_route('index');
+    }
+
+    public function details(int $id): View {
+        $report = UserReport::find($id);
+
+        if ($report === null) {
+            abort(404);
+        }
+
+        return view('admin.report_details', ['report' => $report]);
+    }
+
+    public function resolve(int $id): RedirectResponse {
+        $report = UserReport::find($id);
+
+        if ($report === null) {
+            abort(404);
+        }
+
+        $report->status = 'resolved';
+        $report->save();
+
+        return back();
+    }
+
+    public function reply(int $id, Request $request): RedirectResponse {
+        $inputs = $request->validate([
+            'reply' => ['required']
+        ]);
+
+        $report = UserReport::with('from_user')->find($id);
+
+        if ($report === null) {
+            abort(404);
+        }
+
+        $to = $report->from_user->email;
+
+        Mail::to($to)->send(new UserReportReply($report, $inputs['reply']));
+
+        return back();
     }
 }
