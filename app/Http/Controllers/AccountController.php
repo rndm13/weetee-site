@@ -39,11 +39,11 @@ class AccountController extends Controller
 
         $user = User::find('email', $credentials['email']);
 
-        if ($user !== null && $user->trashed()) {
-            return back()->withErrors([
-                'email' => 'This user has been banned from this site.',
-            ])->onlyInput('email');
-        }
+        // if ($user !== null && $user->trashed()) {
+        //     return back()->withErrors([
+        //         'email' => 'This user has been banned from this site.',
+        //     ])->onlyInput('email');
+        // }
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -66,11 +66,11 @@ class AccountController extends Controller
         $googleUser = Socialite::driver('google')->stateless()->user();
         $user = User::where('email', $googleUser->getEmail())->whereOr('google_id', $googleUser->getId())->first();
 
-        if ($user !== null && $user->trashed()) {
-            return to_route('account.login_form')->withErrors([
-                'email' => 'This user has been banned from this site.',
-            ])->onlyInput('email');
-        }
+        // if ($user !== null && $user->trashed()) {
+        //     return to_route('account.login_form')->withErrors([
+        //         'email' => 'This user has been banned from this site.',
+        //     ])->onlyInput('email');
+        // }
 
         if ($user === null) {
             $user = new User();
