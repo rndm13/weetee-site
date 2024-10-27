@@ -28,7 +28,7 @@ class AdminDashboardController extends Controller
     }
 
     public function documentations(): View {
-        $docs = DocumentationPage::paginate();
+        $docs = DocumentationPage::orderBy('order')->paginate();
 
         return view('admin.documentations', ['docs' => $docs]);
     }

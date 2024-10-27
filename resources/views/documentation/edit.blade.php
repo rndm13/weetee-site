@@ -33,6 +33,16 @@
             </div>
 
             <div class="form__group">
+                <label for="order">Order</label>
+                <input class="form__input" type="number" name="order" value="{{$doc->order}}"/>
+                <p class="form__error">
+                @error('order')
+                    {{ $message }}
+                @enderror
+                </p>
+            </div>
+
+            <div class="form__group">
                 <label for="description">Description (accepts markdown)</label>
                 <textarea class="form__input form__input--mono" type="text" name="description">{{ $doc->description }}</textarea>
                 <p class="form__error">

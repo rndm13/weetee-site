@@ -15,7 +15,7 @@ class DocumentationController extends Controller
 {
     public function show(string $slug): View
     {
-        $doc_list = DocumentationPage::select('title', 'slug')->get();
+        $doc_list = DocumentationPage::select('title', 'slug')->orderBy('order')->get();
 
         $doc = DocumentationPage::where('slug', $slug)->first();
 
@@ -56,6 +56,7 @@ class DocumentationController extends Controller
         $inputs = $request->validate([
             'id' => ['sometimes'],
             'title' => ['required'],
+            'order' => ['required', 'integer'],
             'slug' => [],
             'description' => ['required'],
         ]);
@@ -82,6 +83,7 @@ class DocumentationController extends Controller
             $doc->slug = Str::slug($inputs['title']);
         }
 
+        $doc->order = $inputs['order'];
         $doc->description = $inputs['description'];
 
         $doc->save();

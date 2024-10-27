@@ -13,6 +13,7 @@
                     <div></div>
                     <div></div>
                     <div></div>
+                    <div></div>
                     <a href="/admin/documentation/create" class="form__submit">Add</a>
                 </div>
                 <hr class="collection-docs__separator"/>
@@ -21,6 +22,7 @@
                     <div class="collection-docs__list-item">
                         <a class="collection-docs__field link" href="/documentation/{{$doc->slug}}">{{ $doc->title }}</a>
 	                    <a class="collection-docs__field link" href="/documentation/{{$doc->slug}}">{{ $doc->slug }}</a>
+	                    <p class="collection-docs__field" ">{{ $doc->order }}</p>
                         <p class="collection-docs__field--secondary">@date($doc->updated_at)</p>
                         <div class="collection-docs__actions">
 
