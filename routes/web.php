@@ -68,7 +68,12 @@ Route::middleware("can:admin-dashboard")->group(function () {
     Route::post('/admin/documentation/save', [DocumentationController::class, 'save'])->name('admin.documentation.save');
     Route::post('/admin/documentation/delete/{id}', [DocumentationController::class, 'delete'])->name('admin.documentation.delete');
 
+    Route::post('/admin/documentation/upload-asset/{doc_id}', [DocumentationController::class, 'upload_asset'])->name('admin.documentation.upload_asset');
+    Route::post('/admin/documentation/delete-asset/{id}', [DocumentationController::class, 'delete_asset'])->name('admin.documentation.delete_asset');
+
     Route::get('/admin/translations', [AdminDashboardController::class, 'translations'])->name('admin.translations');
 });
 
+Route::get('/documentation/asset/{doc_slug}/{asset_name}', [DocumentationController::class, 'get_asset'])->name('documentation.get_asset');
 Route::get('/documentation/{slug}', [DocumentationController::class, 'show'])->name('documentation.show');
+Route::get('/documentation/list-assets/{doc_id}', [DocumentationController::class, 'list_assets'])->name('documentation.list_assets');

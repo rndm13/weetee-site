@@ -104,3 +104,7 @@
 .collection-docs {
     @include collection(2fr 2fr 1fr 1fr 1fr);
 }
+
+.collection-assets {
+    @include collection(5fr 1fr);
+}

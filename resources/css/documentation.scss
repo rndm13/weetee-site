@@ -51,12 +51,6 @@
         border: var(--border-size) solid var(--fg-color);
         border-collapse: collapse;
     }
-    thead {
-    }
-    tbody {
-    }
-    tr {
-    }
     th {
         padding: 4px;
         @include md-text(20px, 20px);
@@ -73,5 +67,11 @@
         width: fit-content;
         text-align: center;
         border: var(--border-size) solid var(--fg-color);
+    }
+
+    img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: contain;
     }
 }

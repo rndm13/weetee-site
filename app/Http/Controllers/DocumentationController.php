@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DocumentationAssetsCollection;
 use App\Models\DocumentationPage;
+use App\Models\DocumentationAsset;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\GithubFlavoredMarkdownConverter;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Illuminate\Validation\Rule;
 
 class DocumentationController extends Controller
 {
@@ -53,33 +61,39 @@ class DocumentationController extends Controller
 
     public function save(Request $request): RedirectResponse
     {
-        $inputs = $request->validate([
-            'id' => ['sometimes'],
-            'title' => ['required'],
-            'order' => ['required', 'integer'],
-            'slug' => [],
-            'description' => ['required'],
-        ]);
-
-        $new_doc = true;
         $doc = new DocumentationPage();
+        $edit = false;
 
-        if (array_key_exists("id", $inputs)) {
-            $doc = DocumentationPage::find($inputs["id"]);
-            $new_doc = false;
+        $title_rules = ['required'];
+
+        if ($request->input('id') !== null) {
+            $doc = DocumentationPage::find($request->input('id'));
+            $edit = true;
 
             if ($doc === null) {
                 abort(404);
             }
+
+            array_push($title_rules, Rule::unique('documentation_pages', 'title')->ignoreModel($doc));
         }
 
-        Log::debug($inputs);
+        $inputs = $request->validate([
+            'id' => ['sometimes'],
+            'title' => $title_rules,
+            'order' => ['required', 'integer'],
+            'slug' => [],
+            'description' => ['required'],
+            'assets' => [],
+            'assets.*' => ['required', 'mimes:png,jpg,webp,bmp,gif,mp3,mp4', 'max:10240'],
+        ]);
+
+        DB::beginTransaction();
 
         $doc->title = $inputs['title'];
 
         if ($inputs['slug'] !== null) {
             $doc->slug = $inputs['slug'];
-        } elseif ($new_doc) {
+        } else {
             $doc->slug = Str::slug($inputs['title']);
         }
 
@@ -88,13 +102,115 @@ class DocumentationController extends Controller
 
         $doc->save();
 
+        $dir = 'documentation-assets/'.$doc->id.'/';
+        if (!Storage::disk('public')->exists($dir)) {
+            Storage::disk('public')->makeDirectory($dir);
+        }
+
+        Log::debug($dir);
+
+        if (!$edit && array_key_exists('assets', $inputs)) {
+            foreach ($inputs['assets'] as $file) {
+                $filename = $file->getClientOriginalName();
+                $generated_path = $dir;
+                Log::debug([$filename, $generated_path, $file]);
+                Storage::disk('public')->putFileAs($generated_path, $file, $filename);
+
+                $asset = new DocumentationAsset();
+
+                $asset->documentation_page_id = $doc->id;
+                $asset->name = $filename;
+                $asset->generated_path = $generated_path.$filename;
+
+                $asset->save();
+            }
+        }
+
+        DB::commit();
+
         return back();
     }
 
-    public function delete($id): RedirectResponse
+    public function delete(int $id): RedirectResponse
     {
         DocumentationPage::destroy($id);
 
+        $dir = 'documentation-assets/'.$id;
+
+        if (Storage::disk('public')->exists($dir)) {
+            Storage::disk('public')->deleteDirectory($dir);
+        }
+
         return to_route('admin.documentations');
+    }
+
+    public function get_asset(string $doc_slug, string $asset_name): BinaryFileResponse
+    {
+        Log::debug($asset_name);
+        $asset = DocumentationAsset::where('name', $asset_name)->first();
+
+        if ($asset === null) {
+            return abort(404);
+        }
+
+        $path = Storage::disk('public')->path($asset->generated_path);
+
+        return response()->file($path);
+    }
+
+    public function upload_asset(int $doc_id, Request $request): RedirectResponse
+    {
+        $inputs = $request->validate([
+            'assets' => [],
+            'assets.*' => ['required', 'mimes:png,jpg,webp,bmp,gif,mp3,mp4', 'max:10240'],
+        ]);
+
+        $doc = DocumentationPage::find($doc_id);
+        if ($doc === null) {
+            return abort(404);
+        }
+
+        $dir = 'documentation-assets/'.$doc_id.'/';
+        if (!Storage::disk('public')->exists($dir)) {
+            Storage::disk('public')->makeDirectory($dir);
+        }
+
+        foreach ($inputs['assets'] as $file) {
+            $filename = $file->getClientOriginalName();
+            $generated_path = $dir;
+            Log::debug([$filename, $generated_path, $file]);
+            Storage::disk('public')->putFileAs($generated_path, $file, $filename);
+
+            $asset = new DocumentationAsset();
+
+            $asset->documentation_page_id = $doc->id;
+            $asset->name = $filename;
+            $asset->generated_path = $generated_path.$filename;
+
+            $asset->save();
+        }
+
+        return back();
+    }
+
+    public function delete_asset(int $id): RedirectResponse
+    {
+        $asset = DocumentationAsset::find($id);
+        if ($asset === null) {
+            return abort(404);
+        }
+
+        Storage::delete($asset->generated_path);
+
+        DocumentationAsset::destroy($id);
+
+        return back();
+    }
+
+    public function list_assets(int $doc_id)
+    {
+        return new DocumentationAssetsCollection(
+            DocumentationAsset::where('documentation_page_id', $doc_id)->get()
+        );
     }
 }

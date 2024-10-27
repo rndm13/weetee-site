@@ -4,7 +4,7 @@
 
 @section("content")
 
-<section class="form-post" id="create-post">
+<section class="form-post" id="edit-documentation" data-document-id="{{ $doc->id }}">
     <div class="container">
         <form action="/admin/documentation/save" method="POST" class="form">
             @csrf
@@ -50,6 +50,22 @@
                     {{ $message }}
                 @enderror
                 </p>
+            </div>
+
+            <div class="form__group">
+                <label for="assets">Assets</label>
+                <input class="form__input input-ajax" data-action='/admin/documentation/upload-asset/{{$doc->id}}' type="file" name="assets[]" multiple="multiple" id="documentation-edit-asset" placeholder="Upload a new asset" data-then-js="update_collection_assets">
+                <p class="form__error">
+                @error('asset')
+                    {{ $message }}
+                @enderror
+                </p>
+
+                <div class="collection-assets" data-documentation-id="{{$doc->id}}">
+                    <ul class="collection-assets__list">
+                        <!-- Is set via js -->
+                    </ul>
+                </div>
             </div>
 
             <button class="form__submit" id="post-create-submit">Publish!</button>

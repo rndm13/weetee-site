@@ -4,7 +4,7 @@
 
 @section("content")
 
-<section class="form-post" id="create-post">
+<section class="form-post" id="create-documentation">
     <canvas class="sine-background"></canvas>
     <div class="container">
         <form action="/post/create" method="POST" class="form">
