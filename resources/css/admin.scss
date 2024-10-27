@@ -100,3 +100,7 @@
 .collection-reports {
     @include collection(1fr 1fr 2.5fr 1fr 1fr 1fr);
 }
+
+.collection-docs {
+    @include collection(2fr 2fr 1fr 1fr);
+}

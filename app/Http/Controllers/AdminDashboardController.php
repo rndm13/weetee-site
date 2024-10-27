@@ -13,6 +13,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\UserReportReply;
+use App\Models\DocumentationPage;
 
 class AdminDashboardController extends Controller
 {
@@ -26,8 +27,10 @@ class AdminDashboardController extends Controller
         return view('admin.users', ['users' => $users]);
     }
 
-    public function documentation(): View {
-        return view('admin.documentation');
+    public function documentations(): View {
+        $docs = DocumentationPage::paginate();
+
+        return view('admin.documentations', ['docs' => $docs]);
     }
 
     public function reports(): View {

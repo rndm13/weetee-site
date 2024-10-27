@@ -13,7 +13,7 @@
         </div>
 
         <p class="report-details__reason">
-            {{ nl2br(e($report->reason)) }}
+            {!! nl2br(e($report->reason)) !!}
         </p>
 
         <div class="report-details__buttons">

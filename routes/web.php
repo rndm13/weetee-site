@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers;
+use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\HomeController;
@@ -61,6 +62,13 @@ Route::middleware("can:admin-dashboard")->group(function () {
     Route::post('/admin/category/delete/{id}', [AdminDashboardController::class, 'category_delete'])->name('admin.category_delete');
 
     Route::get('/admin/posts', [AdminDashboardController::class, 'posts'])->name('admin.posts');
-    Route::get('/admin/documentation', [AdminDashboardController::class, 'documentation'])->name('admin.documentation');
+    Route::get('/admin/documentations', [AdminDashboardController::class, 'documentations'])->name('admin.documentations');
+    Route::get('/admin/documentation/create', [DocumentationController::class, 'create_form'])->name('admin.documentation.create');
+    Route::get('/admin/documentation/edit/{id}', [DocumentationController::class, 'edit_form'])->name('admin.documentation.edit');
+    Route::post('/admin/documentation/save', [DocumentationController::class, 'save'])->name('admin.documentation.save');
+    Route::post('/admin/documentation/delete/{id}', [DocumentationController::class, 'delete'])->name('admin.documentation.delete');
+
     Route::get('/admin/translations', [AdminDashboardController::class, 'translations'])->name('admin.translations');
 });
+
+Route::get('/documentation/{slug}', [DocumentationController::class, 'show'])->name('documentation.show');

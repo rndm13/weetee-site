@@ -1,0 +1,77 @@
+.documentation {
+    @extend %container-wrapper;
+
+    padding-top: 16px;
+    min-width: 0;
+
+    position: relative;
+
+    .container {
+        padding: 80px 80px;
+
+        position: relative;
+
+        /* Phone */
+        @media only screen and (max-width: 40em) {
+            padding: 0 12px 0 8px;
+        }
+    }
+}
+
+@mixin md-text($font-size, $line-height) {
+    width: 100%;
+    color: var(--fg-color);
+
+    font-family: "DM Sans", sans-serif;
+    font-weight: 500;
+    font-size: $font-size;
+    line-height: $line-height;
+    text-align: start;
+}
+
+.markdown {
+    h1 {
+        @include md-text(40px, 64px);
+    }
+    h2 {
+        @include md-text(32px, 52px);
+    }
+    h3 {
+        @include md-text(24px, 32px);
+    }
+    p {
+        @include md-text(20px, 20px);
+    }
+
+    table {
+        margin: 16px 0;
+
+        width: 100%;
+
+        border: var(--border-size) solid var(--fg-color);
+        border-collapse: collapse;
+    }
+    thead {
+    }
+    tbody {
+    }
+    tr {
+    }
+    th {
+        padding: 4px;
+        @include md-text(20px, 20px);
+
+        color: var(--silenced-fg-color);
+        width: fit-content;
+        text-align: center;
+        border: var(--border-size) solid var(--fg-color);
+    }
+    td {
+        padding: 4px;
+        @include md-text(20px, 20px);
+
+        width: fit-content;
+        text-align: center;
+        border: var(--border-size) solid var(--fg-color);
+    }
+}

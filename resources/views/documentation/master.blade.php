@@ -29,23 +29,9 @@
 
         <div class="menu-side" id="menu-side">
             <div class="container">
-                @if (!Auth::check())
-                    <a href="/login" class="link">Login</a>
-                    <a href="/register" class="link">Register</a>
-                @else
-                    <div class="user">
-                        <a class="user__name link" href="/profile/{{ Auth::id() }}">{{ Auth::user()->name }}</a>
-                        <a href="/logout" class="link">Logout</a>
-                    </div>
-                    <hr class="menu__separator"/>
-                @endif
-
-                <a href="/admin/users" class="link">Users</a>
-                <a href="/admin/reports" class="link">Reports</a>
-                <a href="/admin/categories" class="link">Categories</a>
-                <a href="/admin/posts" class="link">Posts</a>
-                <a href="/admin/documentations" class="link">Documentations</a>
-                <a href="/admin/translations" class="link">Translations</a>
+                @foreach ($doc_list as $doc_link)
+                    <a href="/documentation/{{$doc_link->slug}}" class="link">{{$doc_link->title}}</a>
+                @endforeach
             </div>
         </div>
     </header>
