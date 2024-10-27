@@ -11,7 +11,7 @@
             <ul class="collection-posts__list">
                 @foreach ($posts as $post)
                     <div class="collection-posts__list-item">
-                        <a class="collection-posts__field link" href="profile/{{$post->user->id}}">{{ $post->user->name }}</a>
+                        <a class="collection-posts__field link" href="/profile/{{$post->user->id}}">{{ $post->user->name }}</a>
 	                    <a class="collection-posts__field link" href="/post/view/{{$post->id}}">{{ $post->title }}</a>
 	                    <div class="collection-posts__field-pills">
 	                        @foreach ($post->categories as $category)
