@@ -75,5 +75,5 @@ Route::middleware("can:admin-dashboard")->group(function () {
 });
 
 Route::get('/documentation/asset/{doc_slug}/{asset_name}', [DocumentationController::class, 'get_asset'])->name('documentation.get_asset');
-Route::get('/documentation/{slug}', [DocumentationController::class, 'show'])->name('documentation.show');
+Route::get('/documentation/{slug?}/', [DocumentationController::class, 'show'])->name('documentation.show');
 Route::get('/documentation/list-assets/{doc_id}', [DocumentationController::class, 'list_assets'])->name('documentation.list_assets');

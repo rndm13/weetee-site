@@ -21,11 +21,15 @@ use Illuminate\Validation\Rule;
 
 class DocumentationController extends Controller
 {
-    public function show(string $slug): View
+    public function show(string $slug = ''): View
     {
         $doc_list = DocumentationPage::select('title', 'slug')->orderBy('order')->get();
 
-        $doc = DocumentationPage::where('slug', $slug)->first();
+        if ($slug !== '') {
+            $doc = DocumentationPage::where('slug', $slug)->first();
+        } else {
+            $doc = DocumentationPage::orderBy('order')->first();
+        }
 
         if ($doc === null) {
             abort(404);
