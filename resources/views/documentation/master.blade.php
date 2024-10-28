@@ -19,10 +19,15 @@
                 <a href="/" class="logo"><h1>Weetee</h1></a>
 
                 <div class="auth-nav">
-                    <div class="user">
-                        <a class="user__name link" href="/profile/{{ Auth::id() }}">{{ Auth::user()->name }}</a>
-                        <a href="/logout" class="link">Logout</a>
-                    </div>
+                    @if (!Auth::check())
+                        <a href="/login" class="link">Login</a>
+                        <a href="/register" class="link">Register</a>
+                    @else
+                        <div class="user">
+                            <a class="user__name link" href="/profile/{{ Auth::id() }}">{{ Auth::user()->name }}</a>
+                            <a href="/logout" class="link">Logout</a>
+                        </div>
+                    @endif
                 </div>
             </nav>
         </div>
