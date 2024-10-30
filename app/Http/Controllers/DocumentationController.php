@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Log;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\GithubFlavoredMarkdownConverter;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\Validation\Rule;
 
@@ -29,7 +30,7 @@ class DocumentationController extends Controller
             $doc = DocumentationPage::where('slug', $slug)->first();
         } else {
             $doc = DocumentationPage::orderBy('order')->first();
-            return to_route('documentation.show', ['slug' => $doc->slug]);
+            return redirect(URL::route('documentation.show', ['slug' => $doc->slug]) . '/');
         }
 
         if ($doc === null) {
