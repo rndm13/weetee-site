@@ -35,7 +35,7 @@
         <div class="menu-side" id="menu-side">
             <div class="container">
                 @foreach ($doc_list as $doc_link)
-                    <a href="/documentation/{{$doc_link->slug}}" class="link">{{$doc_link->title}}</a>
+                    <a href="/documentation/{{$doc_link->slug}}/" class="link">{{$doc_link->title}}</a>
                 @endforeach
             </div>
         </div>

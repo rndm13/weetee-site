@@ -14,6 +14,7 @@ class DocumentationPage extends Model
         'title',
         'slug',
         'description',
+        'order',
     ];
 
     public function assets(): HasMany

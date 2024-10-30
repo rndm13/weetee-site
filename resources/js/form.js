@@ -3,6 +3,7 @@ import crossIcon from "./../imgs/cross.svg";
 
 export function update_collection_assets() {
     let doc_id = $("#edit-documentation").attr("data-document-id");
+    console.log(doc_id);
 
     axios.get("/documentation/list-assets/" + doc_id).then(function (response) {
         let inner_html = "";

@@ -21,7 +21,7 @@ use Illuminate\Validation\Rule;
 
 class DocumentationController extends Controller
 {
-    public function show(string $slug = ''): View
+    public function show(string $slug = ''): View|RedirectResponse
     {
         $doc_list = DocumentationPage::select('title', 'slug')->orderBy('order')->get();
 
@@ -29,6 +29,7 @@ class DocumentationController extends Controller
             $doc = DocumentationPage::where('slug', $slug)->first();
         } else {
             $doc = DocumentationPage::orderBy('order')->first();
+            return to_route('documentation.show', ['slug' => $doc->slug]);
         }
 
         if ($doc === null) {
@@ -52,6 +53,7 @@ class DocumentationController extends Controller
     {
         return view('documentation.create');
     }
+
     public function edit_form(int $id): View
     {
         $doc = DocumentationPage::find($id);
@@ -68,7 +70,7 @@ class DocumentationController extends Controller
         $doc = new DocumentationPage();
         $edit = false;
 
-        $title_rules = ['required'];
+        $slug_rules = ['sometimes'];
 
         if ($request->input('id') !== null) {
             $doc = DocumentationPage::find($request->input('id'));
@@ -78,17 +80,17 @@ class DocumentationController extends Controller
                 abort(404);
             }
 
-            array_push($title_rules, Rule::unique('documentation_pages', 'title')->ignoreModel($doc));
+            array_push($slug_rules, Rule::unique('documentation_pages', 'slug')->ignoreModel($doc));
         }
 
         $inputs = $request->validate([
-            'id' => ['sometimes'],
-            'title' => $title_rules,
+            'id' => ['sometimes', 'integer'],
+            'title' => ['required'],
+            'slug' => $slug_rules,
             'order' => ['required', 'integer'],
-            'slug' => [],
             'description' => ['required'],
-            'assets' => [],
-            'assets.*' => ['required', 'mimes:png,jpg,webp,bmp,gif,mp3,mp4', 'max:10240'],
+            'assets' => ['required'],
+            'assets.*' => $edit ? [] : ['required', 'mimes:png,jpg,webp,bmp,gif,mp3,mp4', 'max:10240'],
         ]);
 
         DB::beginTransaction();
@@ -111,13 +113,10 @@ class DocumentationController extends Controller
             Storage::disk('public')->makeDirectory($dir);
         }
 
-        Log::debug($dir);
-
         if (!$edit && array_key_exists('assets', $inputs)) {
             foreach ($inputs['assets'] as $file) {
                 $filename = $file->getClientOriginalName();
                 $generated_path = $dir;
-                Log::debug([$filename, $generated_path, $file]);
                 Storage::disk('public')->putFileAs($generated_path, $file, $filename);
 
                 $asset = new DocumentationAsset();
@@ -150,7 +149,6 @@ class DocumentationController extends Controller
 
     public function get_asset(string $doc_slug, string $asset_name): BinaryFileResponse
     {
-        Log::debug($asset_name);
         $asset = DocumentationAsset::where('name', $asset_name)->first();
 
         if ($asset === null) {
@@ -182,7 +180,6 @@ class DocumentationController extends Controller
         foreach ($inputs['assets'] as $file) {
             $filename = $file->getClientOriginalName();
             $generated_path = $dir;
-            Log::debug([$filename, $generated_path, $file]);
             Storage::disk('public')->putFileAs($generated_path, $file, $filename);
 
             $asset = new DocumentationAsset();
@@ -213,8 +210,8 @@ class DocumentationController extends Controller
 
     public function list_assets(int $doc_id)
     {
-        return new DocumentationAssetsCollection(
-            DocumentationAsset::where('documentation_page_id', $doc_id)->get()
-        );
+        $assets = DocumentationAsset::where('documentation_page_id', $doc_id)->get();
+
+        return new DocumentationAssetsCollection($assets);
     }
 }
