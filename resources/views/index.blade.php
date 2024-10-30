@@ -4,21 +4,20 @@
 
 @section("content")
 <section class="home" id="home">
-
 	<canvas class="line-background"></canvas>
     <div class="container">
 	    <h2 class="home__title">Start testing APIs freely with Weetee</h1>
 
         <div class="home__buttons">
-            <button class="button--install">
+            <a class="button--install" href="/install/linux">
                 <img src={{ Vite::image('linux.png') }} alt="Linux">
                 Install for linux
-            </button>
+            </a>
 
-            <button class="button--install">
+            <a class="button--install" href="/install/windows">
                 <img src={{ Vite::image('windows_10.png') }} alt="Windows">
                 Install for windows
-            </button>
+            </a>
         </div>
     </div>
 </section>
@@ -28,16 +27,16 @@
 
     <div class="container">
         <div class="about__row">
-                <div class="about__col">
-                    <p class="about__description">
-                        Weetee is a free and open-source tool for manual and automatic HTTP API testing.
-                    </p>
-                    <p class="about__description">
-                        With it you can quickly and efficiently create a test suite for your HTTP API server and run it automatically.
-                    </p>
-                    <p class="about__description">
-                        Weetee also supports remote file syncing so you can work on your test suite from different computers and have them synced.
-                    </p>
+            <div class="about__col">
+                <p class="about__description">
+                    Weetee is a free and open-source tool for manual and automatic HTTP API testing.
+                </p>
+                <p class="about__description">
+                    With it you can quickly and efficiently create a test suite for your HTTP API server and run it automatically.
+                </p>
+                <p class="about__description">
+                    Weetee also supports remote file syncing so you can work on your test suite from different computers and have them synced.
+                </p>
             </div>
             <div class="about__screenshots">
                 <div class="carousel">

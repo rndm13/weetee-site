@@ -26,12 +26,12 @@ class DocumentationController extends Controller
     {
         $doc_list = DocumentationPage::select('title', 'slug')->orderBy('order')->get();
 
-        if ($slug !== '') {
-            $doc = DocumentationPage::where('slug', $slug)->first();
-        } else {
+        if ($slug === '') {
             $doc = DocumentationPage::orderBy('order')->first();
             return redirect(URL::route('documentation.show', ['slug' => $doc->slug]) . '/');
         }
+
+        $doc = DocumentationPage::where('slug', $slug)->first();
 
         if ($doc === null) {
             abort(404);
@@ -202,7 +202,7 @@ class DocumentationController extends Controller
             return abort(404);
         }
 
-        Storage::delete($asset->generated_path);
+        Storage::disk('public')->delete($asset->generated_path);
 
         DocumentationAsset::destroy($id);
 

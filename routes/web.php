@@ -12,6 +12,10 @@ use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'show'])->name('index');
+Route::get('/install/{os}', [HomeController::class, 'install'])->name('install');
+
+Route::get('/forum', [ForumController::class, 'show'])->name('forum.index');
+
 Route::get('/post/create', [PostController::class, 'create_form'])->name('post.create_form');
 Route::post('/post/create', [PostController::class, 'create'])->name('post.create');
 
@@ -20,8 +24,6 @@ Route::post('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit
 Route::post('/post/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
 
 Route::get('/post/view/{id}', [PostController::class, 'show'])->name('post.show');
-
-Route::get('/forum', [ForumController::class, 'show'])->name('forum.index');
 
 Route::get('/login', [AccountController::class, 'login_form'])->name('account.login_form');
 Route::post('/login', [AccountController::class, 'login'])->name('account.login');
