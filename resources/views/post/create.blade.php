@@ -32,16 +32,6 @@
                 </p>
             </div>
 
-            <div class="form__group">
-                <label for="order">Order</label>
-                <input class="form__input" type="number" name="order" value="1"/>
-                <p class="form__error">
-                @error('order')
-                    {{ $message }}
-                @enderror
-                </p>
-            </div>
-
             @if ($categories !== null && count($categories) !== 0)
             <div class="form__group">
                 <label for="categories[]">Categories</label>
