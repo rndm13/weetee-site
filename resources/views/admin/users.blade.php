@@ -17,7 +17,7 @@
                         <p class="collection-users__field--secondary">@date($user->created_at)</p>
 
                         <div class="collection__actions collection-users__actions">
-                            <form action="/user/delete/{{ $user->id }}" method="user">
+                            <form action="/account/delete/{{ $user->id }}" method="POST">
                                 @csrf
                                 <button class="action--delete"> <img src={{ Vite::image("cross.svg") }} /></button>
                             </form>
