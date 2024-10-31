@@ -70,7 +70,7 @@
             </li>
             <li class="faq__element">
                 <p class="faq__question">How do I use it?</p>
-                <p class="faq__answer">First create a new test by clicking on the green plus button near your root group. Then edit the newly added test to suit your needs. You can read more on the <a href="/documentation/quick-start">quick start</a> page in our documentation</p>
+                <p class="faq__answer">First create a new test by clicking on the green plus button near your root group. Then edit the newly added test to suit your needs. You can read more on the <a href="/documentation/getting-started/">getting started</a> page in our documentation</p>
             </li>
             <li class="faq__element">
                 <p class="faq__question">How is it different from postman?</p>
