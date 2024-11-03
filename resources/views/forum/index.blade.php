@@ -8,7 +8,7 @@
     <canvas class="sine-background"> </canvas>
     <div class="container">
         <div class="forum__title">
-            <h2>Forum</h2>
+            <h2>@lang('forum.forum')</h2>
         </div>
         <div class="forum__header">
             <form action="/forum" class="forum__form">
@@ -35,8 +35,8 @@
         </div>
 
         <div class="forum__create">
-            <p>Have a question or would like to request a feature?</p>
-            <a href="/post/create" class="link"> Create your own post </a>
+            <p>@lang('forum.have_a_question')</p>
+            <a href="/post/create" class="link"> @lang('forum.create_your_own_post') </a>
         </div>
 
         <div class="collection-posts">

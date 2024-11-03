@@ -9,7 +9,7 @@
         <div class="profile__header">
             <h3 class="profile__role"> {{ucfirst($user->role)}} </h3>
             <h2 class="profile__name"> {{$user->name}} </h2>
-            <div class="profile__date"> Created on @date($user->created_at) </div>
+            <div class="profile__date"> @lang('forms.created_at', ['date' => @date($user->created_at)]) </div>
 
             @auth
             <div class="profile__actions">
@@ -31,7 +31,7 @@
             @endauth
         </div>
 
-        <p class="profile__section-title"> Posts </p>
+        <p class="profile__section-title"> @lang('forum.posts') </p>
 
         <div class="collection-posts">
             <ul class="collection-posts__list">
@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <p class="profile__section-title"> Comments </p>
+        <p class="profile__section-title"> @lang('forum.comments') </p>
 
         <div class="collection-comments">
             <ul class="collection-comments__list">

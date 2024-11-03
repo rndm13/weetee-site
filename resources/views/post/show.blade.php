@@ -14,10 +14,10 @@
 
         <div class="post__header">
             <div class="post__dates">
-                <a class="post__author link" href="/profile/{{ $post->user->id }}"> By {{ $post->user->name }} </a>
-                <p class="post__date"> Created on @date($post->created_at) </p>
+                <a class="post__author link" href="/profile/{{ $post->user->id }}"> @lang('forms.by_user', ['user' => $post->user->name ]) </a>
+                <p class="post__date"> @lang('forms.created_at', ['date' => @date($post->created_at)]) </p>
                 @if ($post->updated_at != $post->created_at)
-                    <p class="post__date"> Edited on @date($post->updated_at) </p>
+                    <p class="post__date"> @lang('forum.updated_at', ['date' => @date($post->updated_at)]) </p>
                 @endif
             </div>
 
@@ -48,7 +48,7 @@
 </section>
 
 <section class="comments" data-edit={{ !$errors->isEmpty() ? "true" : "false" }}>
-    <h3 class="comments__title"> Comments </h3>
+    <h3 class="comments__title"> @lang('forum.comments') </h3>
 
     @auth
     <form class="form comment-form" action="/comment/create/{{ $post->id }}" method="POST">
@@ -74,11 +74,11 @@
         @foreach ($post->comments as $comment)
             <div class="comment" id="comment_{{$comment->id}}">
                 <div class="comment__header">
-                    <a class="comment__author link" href="/profile/{{ $comment->user->id }}"> By {{ $comment->user->name }} </a>
+                    <a class="comment__author link" href="/profile/{{ $comment->user->id }}"> @lang('forms.by_user', ['user' => $comment->user->name]) </a>
                     <div class="comment__dates">
-                        <p class="comment__date"> Created on @date($comment->created_at) </p>
+                        <p class="comment__date"> @lang('forms.created_at', ['date' => @date($comment->created_at)]) </p>
                         @if ($comment->updated_at != $comment->created_at)
-                            <p class="comment__date"> Edited on @date($comment->updated_at) </p>
+                            <p class="comment__date"> @lang('forms.updated_at', ['date' => @date($comment->updated_at)]) </p>
                         @endif
                     </div>
 

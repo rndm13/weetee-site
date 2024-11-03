@@ -30,4 +30,8 @@ return [
 
     'leave_comment' => 'Залиште свій коментар',
     'send' => 'Надіслати',
+
+    'by_user' => 'Від :user',
+    'created_at' => 'Створено о :date',
+    'updated_at' => 'Змінено о :date',
 ];

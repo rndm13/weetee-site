@@ -30,4 +30,8 @@ return [
 
     'leave_comment' => 'Leave a comment',
     'send' => 'Send',
+
+    'by_user' => 'By :user',
+    'created_at' => 'Created on :date',
+    'updated_at' => 'Updated on :date',
 ];
