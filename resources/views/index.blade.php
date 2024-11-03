@@ -76,7 +76,7 @@
                 <p class="faq__question">How is it different from postman?</p>
                 <p class="faq__answer">It allows you to save files on your own pc as well as remotely or remotely on self-hosted file saving API, unlike postman which can only save remotely on their server</p>
                 <p class="faq__answer">Weetee has the functionality to both import and export test suite to OpenAPI Swagger format, while postman can only import from it.</p>
-                <p class="faq__answer">Additionally, Weetee is a desktop application written in C++ unlike postman that is electron based. While making it in C++ creates more risk for bugs it also makes it much faster.</p>
+                <p class="faq__answer">Additionally, Weetee is a desktop application written in C++ unlike postman that is electron based. While making it in C++ creates more risk for bugs it also makes it perform much faster.</p>
             </li>
         </ul>
     </div>
