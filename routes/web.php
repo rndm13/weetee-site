@@ -12,6 +12,7 @@ use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'show'])->name('index');
+Route::get('/locale/{l}', [HomeController::class, 'locale'])->name('locale');
 Route::get('/install/{os}', [HomeController::class, 'install'])->name('install');
 
 Route::get('/forum', [ForumController::class, 'show'])->name('forum.index');
