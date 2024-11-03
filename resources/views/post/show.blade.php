@@ -54,10 +54,10 @@
     <form class="form comment-form" action="/comment/create/{{ $post->id }}" method="POST">
         @csrf
 
-        <h3 class="form__title"> Leave your own comment!</h3>
+        <h3 class="form__title"> @lang('forms.leave_comment') </h3>
 
         <div class="form__group">
-            <label for="description">Description</label>
+            <label for="description">@lang('forms.description')</label>
             <textarea class="form__input" name="description"></textarea>
             <p class="form__error">
             @error('comment')
@@ -66,7 +66,7 @@
             </p>
         </div>
 
-        <button class="form__submit">Send</button>
+        <button class="form__submit">@lang('forms.send')</button>
     </form>
     @endauth
 

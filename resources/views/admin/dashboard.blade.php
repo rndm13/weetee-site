@@ -45,7 +45,6 @@
                 <a href="/admin/categories" class="link">Categories</a>
                 <a href="/admin/posts" class="link">Posts</a>
                 <a href="/admin/documentations" class="link">Documentations</a>
-                <a href="/admin/translations" class="link">Translations</a>
             </div>
         </div>
     </header>

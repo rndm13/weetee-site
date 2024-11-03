@@ -19,13 +19,15 @@
                 <a href="/" class="logo"><h1>Weetee</h1></a>
 
                 <div class="auth-nav">
+                    <a href="/locale/en" class="link">EN</a>
+                    <a href="/locale/uk" class="link">UK</a>
                     @if (!Auth::check())
-                        <a href="/login" class="link">Login</a>
-                        <a href="/register" class="link">Register</a>
+                        <a href="/login" class="link">@lang('header.login')</a>
+                        <a href="/register" class="link">@lang('header.register')</a>
                     @else
                         <div class="user">
                             <a class="user__name link" href="/profile/{{ Auth::id() }}">{{ Auth::user()->name }}</a>
-                            <a href="/logout" class="link">Logout</a>
+                            <a href="/logout" class="link">@lang('header.logout')</a>
                         </div>
                     @endif
                 </div>

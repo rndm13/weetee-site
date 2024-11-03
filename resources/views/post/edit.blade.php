@@ -10,10 +10,10 @@
         <form action="/post/edit/{{ $post->id }}" method="POST" class="form">
             @csrf
 
-            <h3 class="form__title">Edit post</h3>
+            <h3 class="form__title">@lang('forms.edit_post')</h3>
 
             <div class="form__group">
-                <label for="title">Title</label>
+                <label for="title">@lang('forms.title')</label>
                 <input class="form__input" type="text" name="title" value="{{ $post->title }}">
                 <p class="form__error">
                 @error('title')
@@ -23,7 +23,7 @@
             </div>
 
             <div class="form__group">
-                <label for="description">Description</label>
+                <label for="description">@lang('forms.description')</label>
                 <textarea class="form__input" type="text" name="description">{{ $post->description }}</textarea>
                 <p class="form__error">
                 @error('description')
@@ -34,7 +34,7 @@
 
             @if ($categories !== null && count($categories) !== 0)
             <div class="form__group">
-                <label for="categories[]">Categories</label>
+                <label for="categories[]">@lang('forms.categories')</label>
 
                 @php
                 foreach ($categories as $category) {
@@ -65,7 +65,7 @@
             </div>
             @endif
 
-            <button class="form__submit" id="post-edit-submit">Edit</button>
+            <button class="form__submit" id="post-edit-submit">@lang('forms.save')</button>
         </form>
     </div>
 </section>

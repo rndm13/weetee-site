@@ -79,8 +79,4 @@ class AdminDashboardController extends Controller
 
         return view('admin.posts', ['posts' => $posts]);
     }
-
-    public function translations(): View {
-        return view('admin.translations');
-    }
 }

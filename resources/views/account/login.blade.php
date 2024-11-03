@@ -10,10 +10,10 @@
         <form action="/login" method="POST" class="form">
             @csrf
 
-            <h3 class="form__title">Login</h3>
+            <h3 class="form__title">@lang('forms.login')</h3>
 
             <div class="form__group">
-                <label for="email">Email</label>
+                <label for="email">@lang('forms.email')</label>
                 <input class="form__input" type="email" name="email">
                 <p class="form__error">
                 @error('email')
@@ -23,7 +23,7 @@
             </div>
 
             <div class="form__group">
-                <label for="password">Password</label>
+                <label for="password">@lang('forms.password')</label>
                 <input class="form__input" type="password" name="password">
                 <p class="form__error">
                 @error('email')
@@ -32,17 +32,17 @@
                 </p>
             </div>
 
-            <button class="form__submit" id="login-submit">Login</button>
+            <button class="form__submit" id="login-submit">@lang('forms.login')</button>
 
             <div class="login__auth">
                 <a class="button--auth-google" href="/auth/google/redirect">
                     <img src={{ Vite::image('google.png') }} alt="Google">
-                    Login with Google
+                    @lang('forms.login_with_google')
                 </a>
             </div>
 
             <div class="login__links">
-                <a class="link" href="/register">Don't have an account? Register now.</a>
+                <a class="link" href="/register">@lang('forms.register_link')</a>
             </div>
         </form>
     </div>
