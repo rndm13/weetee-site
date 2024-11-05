@@ -9,7 +9,7 @@
     @vite(['resources/js/app.js'])
 </head>
 <body>
-    <header class="header">
+    <header class="header header--documentation">
         <div class="container">
             <nav class="header__nav">
                 <button class="menu-side__button menu-button" data-menu-id="menu-side">
@@ -17,6 +17,12 @@
                 </button>
 
                 <a href="/" class="logo"><h1>Weetee</h1></a>
+
+                <form action="/documentation/search/" class="header__search">
+                    <div class="form__group">
+                        <input class="form__input" type="text" name="search" placeholder="Search..." value="{{Request::input('search')}}">
+                    </div>
+                </form>
 
                 <div class="auth-nav">
                     <a href="/locale/en" class="link">EN</a>
@@ -36,6 +42,13 @@
 
         <div class="menu-side" id="menu-side">
             <div class="container">
+                <div class="user">
+                    <a href="/" class="logo"><h1>Weetee</h1></a>
+                    <a href="/locale/en" class="link">EN</a>
+                    <a href="/locale/uk" class="link">UK</a>
+                </div>
+
+                <hr class="menu__separator"/>
                 @foreach ($doc_list as $doc_link)
                     <a href="/documentation/{{$doc_link->slug}}/" class="link">{{$doc_link->title}}</a>
                 @endforeach

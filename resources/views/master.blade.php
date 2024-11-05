@@ -44,6 +44,12 @@
 
         <div class="menu" id="menu">
             <div class="container">
+                <div class="user">
+                    <a href="/locale/en" class="link">EN</a>
+                    <a href="/locale/uk" class="link">UK</a>
+                </div>
+                <hr class="menu__separator"/>
+
                 @if (!Auth::check())
                     <a href="/login" class="link">@lang('header.login')</a>
                     <a href="/register" class="link">@lang('header.register')</a>

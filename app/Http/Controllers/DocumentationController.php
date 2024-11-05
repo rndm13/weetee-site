@@ -215,4 +215,19 @@ class DocumentationController extends Controller
 
         return new DocumentationAssetsCollection($assets);
     }
+
+    public function search(Request $request)
+    {
+        $inputs = $request->validate([
+            'search' => ['required', 'max:1024'],
+        ]);
+
+        $doc_list = DocumentationPage::select('title', 'slug')->orderBy('order')->get();
+        $docs = DocumentationPage::where('description', 'ilike', '%' . $inputs['search'] . '%')->paginate();
+
+        return view("documentation.search", [
+            'docs' => $docs,
+            'doc_list' => $doc_list,
+        ]);
+    }
 }

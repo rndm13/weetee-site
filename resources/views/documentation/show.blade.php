@@ -6,10 +6,10 @@
 
 @section("title", $title)
 
+@section("content")
 <section class="documentation">
     <div class="container markdown">
         {!! $doc_markdown !!}
     </div>
 </section>
-@section("content")
 @endsection
